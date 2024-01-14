@@ -43,7 +43,7 @@ export default function ContactInfo({dispatch, warnings, existingInfo}){
       <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="email" defaultValue={existingInfo.contactInfo?.email ?? ''}/>
       <label htmlFor="phoneNumber" className={warnings.phoneNumber ? "text-red-200" : "text-black"}>{warnings.phoneNumber ? warnings.phoneNumber : "Phone Number"}</label>
       <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="phoneNumber" defaultValue={existingInfo.contactInfo?.phoneNumber ?? ''}/>
-      <button className="btn btn-primary">Next</button>
+      <button className="btn btn-primary w-1/3 flex self-end m-6">Next</button>
     </div>
     </form>
   )

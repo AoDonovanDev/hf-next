@@ -5,7 +5,7 @@
 body{
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(#808000, aliceblue); 
+    background-image: linear-gradient(#ffedfe, aliceblue); 
     background-size: cover;
     height: 100vh;
     width: 100vw;
