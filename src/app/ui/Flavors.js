@@ -9,7 +9,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
   'Hummingbird', 'Matcha', 'Lemon', 'Lime', 'Orange', 'Yuzu', 'Lavender', 'Earl Grey', 'Coconut', 'Carrot', 'Golden Milk', 'Mixed Berry', 'Tamarind', 
   'Banana', 'Mountain Dew', 'Cornmeal', 'Honey', 'Chai', 'Peach', 'Lychee']
 
-  const [other, setOther] = useState(false)
+  const [other, setOther] = useState(existingInfo.cakeDetails?.fillingType === 'other' ? true : false)
   function handleOther(e){
     setOther(()=>{
       return e.target.value === 'other' ? true : false;
@@ -17,9 +17,25 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     console.log(other)
   }
 
+  function extraHandler(e){
+    
+    switch(e.target.name){
+      case 'glitterCherries':
+        dispatch({type: 'extra', payload: {total : e.target.checked ? existingInfo.total + 5 : existingInfo.total - 5}})
+        break
+      case 'discoBalls':
+        dispatch({type: 'extra', payload: {total : e.target.checked ? existingInfo.total + 10 : existingInfo.total - 10}})
+        break
+      case 'treeTrunk':
+        dispatch({type: 'extra', payload: {total : e.target.checked ? existingInfo.total + 20 : existingInfo.total - 20}})
+        break
+      case 'bows':
+        dispatch({type: 'extra', payload: {total : e.target.checked ? existingInfo.total + 2 : existingInfo.total - 2}})
+    }
+  }
+
   function next(formData){
     console.log(formData)
-    console.log(formData.get('frostingType'))
     const cakeFlavor = formData.get('cakeFlavor');
     const frostingType = formData.get('frostingType');
     const frostingFlavor = formData.get('frostingFlavor');
@@ -65,7 +81,9 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     <form className="overflow-auto overscroll-contain" action={next}>
       <div className="mb-6">
         <label htmlFor="cakeFlavor" className="ml-3 mb-2">What flavor cake?</label>
-        <select className="select select-bordered w-full max-w-xs" name="cakeFlavor" defaultValue={'placeholder'} >
+        <select className="select select-bordered w-full max-w-xs" 
+                name="cakeFlavor" 
+                defaultValue={existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.cakeFlavor : 'placeholder'} >
           <option disabled value={'placeholder'}>Choose a cake flavor</option>
           {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
         </select>
@@ -74,21 +92,38 @@ export default function Flavors({dispatch, warnings, existingInfo}){
       <div className="mb-6">
         <label className="ml-3 mb-2">Frosting type:</label>
         <div className="mb-2 flex items-center">
-          <input type="radio" name="frostingType" className="radio radio-secondary" id={"smb"}value={"Swiss Meringue Buttercream"}/>
+          <input type="radio" 
+                 name="frostingType" 
+                 className="radio radio-secondary" 
+                 id={"smb"}
+                 value={"Swiss Meringue Buttercream"} 
+                 defaultChecked={existingInfo.cakeDetails?.frostingType === 'Swiss Meringue Buttercream'}/>
           <label htmlFor="smb" className="ml-6">Swiss Meringue Buttercream</label>
         </div>
         <div className="mb-2 flex items-center">
-          <input type="radio" name="frostingType" className="radio radio-secondary" id={"ab"} value={"American Buttercream"}/>
+          <input type="radio" 
+                 name="frostingType" 
+                 className="radio radio-secondary" 
+                 id={"ab"} 
+                 value={"American Buttercream"}
+                 defaultChecked={existingInfo.cakeDetails?.frostingType === 'American Buttercream'}/>
           <label htmlFor="ab" className="ml-6">American Buttercream</label>
         </div>
         <div className="mb-2 flex items-center">
-          <input type="radio" name="frostingType" className="radio radio-secondary" id={"cc"}value={"Cream Cheese"}/>
+          <input type="radio" 
+                 name="frostingType" 
+                 className="radio radio-secondary" 
+                 id={"cc"}
+                 value={"Cream Cheese"}
+                 defaultChecked={existingInfo.cakeDetails?.frostingType === 'Cream Cheese'}/>
           <label htmlFor="cc" className="ml-6">Cream Cheese (not available for heavily piped cakes)</label>
         </div>
       </div>
       <div className="mb-6">
         <label className="ml-3 mb-2">What flavor frosting?</label>
-        <select className="select select-bordered w-full max-w-xs" name="frostingFlavor" defaultValue={'placeholder'}>
+        <select className="select select-bordered w-full max-w-xs"
+                name="frostingFlavor" 
+                defaultValue={existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.frostingFlavor : 'placeholder'}>
           <option disabled value="placeholder" >Choose a frosting flavor</option>
           {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
         </select>
@@ -96,55 +131,113 @@ export default function Flavors({dispatch, warnings, existingInfo}){
       <div className="mb-6">
         <label>Filling Type</label>
         <div className="mb-2 flex items-center"> 
-          <input type="radio" name="fillingType" className="radio radio-secondary" value="Ganache" onChange={(e)=>handleOther(e)}/>
+          <input type="radio" 
+                 name="fillingType" c
+                 className="radio radio-secondary" 
+                 value="Ganache" 
+                 onChange={(e)=>handleOther(e)}
+                 defaultChecked={existingInfo.cakeDetails?.fillingType === 'Ganache'}/>
           <label className="ml-6">Ganache</label>
         </div>
         <div className="mb-2 flex items-center">
-          <input type="radio" name="fillingType" className="radio radio-secondary" value="Curd" onChange={(e)=>handleOther(e)}/>
+          <input type="radio" 
+                name="fillingType" 
+                className="radio radio-secondary" 
+                value="Curd" 
+                onChange={(e)=>handleOther(e)}
+                defaultChecked={existingInfo.cakeDetails?.fillingType === 'Curd'}/>
           <label className="ml-6">Curd</label>
         </div>
         <div className="mb-2 flex items-center">
-          <input type="radio" name="fillingType" className="radio radio-secondary" value="Jame" onChange={(e)=>handleOther(e)}/>
+          <input type="radio" 
+                 name="fillingType" 
+                 className="radio radio-secondary" 
+                 value="Jam" 
+                 onChange={(e)=>handleOther(e)}
+                 defaultChecked={existingInfo.cakeDetails?.fillingType === 'Jam'}/>
           <label className="ml-6">Jam</label>
         </div>
         <div className="mb-2 flex items-center">
-          <input type="radio" name="fillingType" className="radio radio-secondary" value="Cream Cheese" onChange={(e)=>handleOther(e)}/>
+          <input type="radio" 
+                 name="fillingType" 
+                 className="radio radio-secondary" 
+                 value="Cream Cheese" 
+                 onChange={(e)=>handleOther(e)}
+                 defaultChecked={existingInfo.cakeDetails?.fillingType === 'Cream Cheese'}/>
           <label className="ml-6">Cream Cheese</label>
         </div>
         <div className="mb-2 flex items-center">
-          <input type="radio" name="fillingType" className="radio radio-secondary" value="Fresh Fruit" onChange={(e)=>handleOther(e)}/>
+          <input type="radio" 
+                 name="fillingType" 
+                 className="radio radio-secondary" 
+                 value="Fresh Fruit" 
+                 onChange={(e)=>handleOther(e)}
+                 defaultChecked={existingInfo.cakeDetails?.fillingType === 'Fresh Fruit'}/>
           <label className="ml-6">Fresh Fruit</label>
         </div>
         <div className="mb-2 flex items-center">
-          <input type="radio" name="fillingType" className="radio radio-secondary" value="other" onChange={(e)=>handleOther(e)} />
+          <input type="radio" 
+                 name="fillingType" 
+                 className="radio radio-secondary" 
+                 value="other" 
+                 onChange={(e)=>handleOther(e)} 
+                 defaultChecked={existingInfo.cakeDetails?.fillingType === 'other'}/>
           <label className="ml-6">Other</label>
         </div>
-        {other && <input type="text" name="other" placeholder="Please type another option here" className="input input-bordered input-sm input-info w-full max-w-xs"></input>}
+        {other && <input type="text" 
+                         name="other" 
+                         placeholder="Please type another option here" 
+                         className="input input-bordered input-sm input-info w-full max-w-xs"
+                         defaultValue={existingInfo.cakeDetails?.fillingType === 'other' ? existingInfo.cakeDetails.other : ''}/>}
       </div>
       <div className="my-6">
         <label>What flavor filling?</label>
-        <input type="text" placeholder="Type here" className="input input-bordered input-accent w-full max-w-xs" name="fillingFlavor"/>
+        <input type="text" 
+               placeholder="Type here" 
+               className="input input-bordered input-accent w-full max-w-xs" 
+               name="fillingFlavor"
+               defaultValue={existingInfo.cakeDetails?.fillingFlavor ?? ''}/>
       </div>
       <div className="mb-6">
           <label>Extras</label>
           <div className="display flex w-5/6">
-            <input type="checkbox" className="checkbox checkbox-secondary" name="glitterCherries" />
+            <input type="checkbox" 
+                   className="checkbox checkbox-secondary" 
+                   name="glitterCherries" 
+                   defaultChecked={existingInfo.cakeDetails?.extras?.glitterCherries === 'on'}
+                   onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Glitter cherries +$5</label>
           </div>
           <div className="display flex w-5/6">
-            <input type="checkbox" className="checkbox checkbox-secondary" name="discoBalls"/>
+            <input type="checkbox" 
+                   className="checkbox checkbox-secondary" 
+                   name="discoBalls"
+                   defaultChecked={existingInfo.cakeDetails?.extras?.discoBalls === 'on'}
+                   onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Disco balls +$10</label>
           </div>
           <div className="display flex w-5/6">
-            <input type="checkbox" className="checkbox checkbox-secondary" name="treeTrunk"/>
+            <input type="checkbox" 
+                   className="checkbox checkbox-secondary" 
+                   name="treeTrunk" 
+                   defaultChecked={existingInfo.cakeDetails?.extras?.treeTrunk === 'on'}
+                   onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Tree Trunk Style +$20</label>
           </div>
           <div className="display flex w-5/6">
-            <input type="checkbox" className="checkbox checkbox-secondary" name="bows"/>
+            <input type="checkbox" 
+                   className="checkbox checkbox-secondary" 
+                   name="bows"
+                   defaultChecked={existingInfo.cakeDetails?.extras?.bows === 'on'}
+                   onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Keepsake bows +$2 each</label>
           </div>
           <div className="display flex w-5/6">
-            <input type="checkbox" className="checkbox checkbox-secondary" name="freshFruit"/>
+            <input type="checkbox" 
+                   className="checkbox checkbox-secondary" 
+                   name="freshFruit"
+                   defaultChecked={existingInfo.cakeDetails?.extras?.freshFruit === 'on'}
+                   onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Fresh fruit +Market Price</label>
           </div>
       </div>

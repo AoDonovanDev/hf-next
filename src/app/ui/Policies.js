@@ -5,10 +5,14 @@ export default function Policies({dispatch, warnings}){
   function submit(formData){
     const agree = formData.get('agree')
     if(agree !== 'yes'){
-      dispatch({type: 'warn', payload:{agree: 'You must agree to the polices.'}})
+      dispatch({type: 'warn', payload:{agree: 'You must agree to the policies.'}})
     } else {
       dispatch({type: 'submit', payload:{agree}})
     }
+  }
+
+  function prev(){
+    dispatch({type: 'prev'})
   }
 
 
@@ -28,10 +32,11 @@ export default function Policies({dispatch, warnings}){
           If the booking is cancelled due to illness or any other unforeseen circumstance that affects the ability to complete the order, the deposit will be refunded within 7 days after notification of cancellation.
           Pick up only. Delivery unavailable at this time.  <br/><br/>
           I agree to all of the above</p>
+          {warnings && <h1 className="text-warn">{warnings.agree}</h1>}
           <input type="radio" name="agree" className="radio" value={'yes'} />
       </div>
-      <button type="button">Previous</button>
-      <button type="submit">Submit</button>
+      <button type="button" className="btn btn-warn" onClick={prev}>Previous</button>
+      <button type="submit" className="btn btn-primary">Submit</button>
     </form>
   )
 }

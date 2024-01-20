@@ -1,12 +1,14 @@
 import Image from "next/image"
-import { test } from "@/lib/actions";
-import TestEmail from "@/emails/TestEmail";
+import { upload } from "@/lib/actions";
 
 export default function ReferencePhoto({dispatch, warnings, existingInfo}){
 
   async function next(formData){
     console.log(formData.get('referencePhoto'));
     const fileInfo = formData.get('referencePhoto');
+    if(!fileInfo.size){
+      return dispatch({ type: 'next', payload: {imgUrl: ''} })
+    }
     const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
         const fileReader = new FileReader();
@@ -22,8 +24,11 @@ export default function ReferencePhoto({dispatch, warnings, existingInfo}){
       });
     };
     const base64 = await convertBase64(fileInfo);
-    /* const response = await test(existingInfo.contactInfo.firstName, base64); */
-    dispatch({type: 'next', payload:{referencePhoto: base64}});
+
+    const imgUrl = await upload(base64)
+
+
+    dispatch({type: 'next', payload:{imgUrl}});
   }
 
   function prev(){
