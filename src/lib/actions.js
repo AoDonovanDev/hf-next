@@ -1,7 +1,6 @@
 'use server';
 
 import { Resend } from "resend";
-import TestEmail from "@/emails/TestEmail";
 import { unstable_noStore } from "next/cache";
 import OrderReceivedNotice from "@/emails/OrderReceivedNotice";
 

@@ -16,9 +16,11 @@ export default function CakeType({dispatch, warnings, existingInfo}){
   }
 
   function next(formData){
-    /* const cakeType = formData.get('type');
-    const cakeSize = formData.get('cakeSize') */
+    if(!size){
+      dispatch({type: 'warn', payload: {cakeSize: "Please select a size!"}})
+    } else {
     dispatch({type: 'next', payload: {cakeType: type, cakeSize: size}})
+    }
   }
 
   function radioHandler(e){
@@ -26,7 +28,7 @@ export default function CakeType({dispatch, warnings, existingInfo}){
   }
 
   return (
-    <div className="form-control flex md:w-full md:h-full justify-between">
+    <div className="form-control flex justify-between w-full h-full overflow-auto overscroll-contain">
       <label className="cursor-pointer label flex justify-center m-6">
         <div className="flex flex-col">
           <label className="swap swap-flip text-2xl">
@@ -41,6 +43,7 @@ export default function CakeType({dispatch, warnings, existingInfo}){
       <p className="m-6">{type==='trust' ? "Trust Cake: A trust cake is a surprise! The only information requirements are any allergies, dislikes, and size. If there is a specific cake Housefly has produced that you want your cake to be inspired by design wise, please attach a photo at the end of this form. All prompts, details or preferences you want to share are welcome! "
       : "Custom cake: Totally up to you! Choose from options in the drop down menus and add any other details in the text box. Some flavors are combinable! "}</p>
       <div className="flex flex-col">
+        <p className="text-red-400 ml-6">{warnings.cakeSize}</p>
         <div className="flex">
           <input type="radio" name="cakeSize" className="radio radio-secondary" checked={size === '6'} onChange={(e)=>radioHandler(e)} value={6}/>
           <label>6” ~ 8-10 servings $80</label>

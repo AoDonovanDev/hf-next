@@ -40,7 +40,7 @@ export default function ReferencePhoto({dispatch, warnings, existingInfo}){
   return(
     <form className="overflow-auto overscroll-contain" action={next}>
       <div className="flex flex-col">
-        <Image src="/photoPickerCake.jpeg" alt="cake reference photo" height={200} width={200} className="h-5/6 w-full"/>
+        <Image src="/croppedPhotoPickerCake.jpg" alt="cake reference photo" height={200} width={200} className="w-full"/>
         <div>
           <h2 className="card-title">Add a reference photo</h2>
           <p>Add a photo of a Housefly cake that you&apos;ve liked or other photo for color reference. No cake will be perfectly replicated. Cakes by other local bakers are not allowed as reference. If you like their work, you should support and order from them!</p>

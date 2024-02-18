@@ -5,7 +5,7 @@ export default function Policies({dispatch, warnings}){
   function submit(formData){
     const agree = formData.get('agree')
     if(agree !== 'yes'){
-      dispatch({type: 'warn', payload:{agree: 'You must agree to the policies.'}})
+      dispatch({type: 'warn', payload:{agree: 'You have to agree.'}})
     } else {
       dispatch({type: 'submit', payload:{agree}})
     }
@@ -32,11 +32,13 @@ export default function Policies({dispatch, warnings}){
           If the booking is cancelled due to illness or any other unforeseen circumstance that affects the ability to complete the order, the deposit will be refunded within 7 days after notification of cancellation.
           Pick up only. Delivery unavailable at this time.  <br/><br/>
           I agree to all of the above</p>
-          {warnings && <h1 className="text-warn">{warnings.agree}</h1>}
+          {warnings && <h1 className="text-red-400">{warnings.agree}</h1>}
           <input type="radio" name="agree" className="radio" value={'yes'} />
       </div>
-      <button type="button" className="btn btn-warn" onClick={prev}>Previous</button>
-      <button type="submit" className="btn btn-primary">Submit</button>
+      <div className="flex justify-between">
+        <button type="button" className="btn btn-warn" onClick={prev}>Previous</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
+      </div>
     </form>
   )
 }

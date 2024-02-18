@@ -98,7 +98,9 @@ export default function CakeForm(){
         submit(state.formData);
         return {...state, currentStep: state.currentStep +1}
       case 'extra': {
-        state.formData = {...state.formData, ...action.payload};
+        state.formData.cakeDetails.extras[action.payload.name] = action.payload.checkedState;
+        state.formData.total = action.payload.total;
+        state.formData = {...state.formData};
         return {...state}
       }
 
@@ -110,21 +112,31 @@ export default function CakeForm(){
     currentStep: 0,
     warnings: '',
     formData: {
-      total: 0
+      total: 0,
+      cakeDetails: {
+        extras: {
+        glitterCherries: null,
+        discoBalls: null,
+        treeTrunk: null,
+        bows: null,
+      }
+      }
     },
   })
 
   return (
     <>
-    <div className={state.currentStep === 7 ? "hero min-h-screen min-w-screen" : "flex flex-col bg-base-200 w-96 h-3/5 md:w-1/3 md:h-2/3 justify-center items-center rounded-lg ring-inset md:pl-6 md:py-6 border-8 bg-pink-100"}>
-      {state.steps[state.currentStep].component(dispatch, state.warnings, state.formData)}
-    </div>
-    <div className="stats shadow">
-        <div className="stat">
-          <div className="stat-title">Estimated Total</div>
-          <div className="stat-value">${state.formData.total}.00</div>
-        </div>
+      <div className={state.currentStep === 7 ? "hero min-h-screen min-w-screen" : "flex flex-col bg-base-200 w-full h-3/5 justify-center md:self-center border-8 bg-pink-100 items-center rounded-lg py-6 md:w-2/3 md:h-2/3 md:pl-6"}>
+        {state.steps[state.currentStep].component(dispatch, state.warnings, state.formData)}
       </div>
+      {(state.currentStep > 3) && <div className="w-full flex justify-center">
+        <div className="stats shadow">
+            <div className="stat">
+              <div className="stat-title">Estimated Total</div>
+              <div className="stat-value">${state.formData.total}.00</div>
+            </div>
+        </div>
+      </div>}
     </>
   )
 }

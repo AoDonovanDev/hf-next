@@ -21,16 +21,57 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     
     switch(e.target.name){
       case 'glitterCherries':
-        dispatch({type: 'extra', payload: {total : e.target.checked ? existingInfo.total + 5 : existingInfo.total - 5}})
+        dispatch(
+          { 
+            type: 'extra', 
+            payload: {
+              total: e.target.checked ? existingInfo.total + 5 : existingInfo.total - 5,
+              name: 'glitterCherries', 
+              checkedState: e.target.checked
+            }
+          })
         break
       case 'discoBalls':
-        dispatch({type: 'extra', payload: {total : e.target.checked ? existingInfo.total + 10 : existingInfo.total - 10}})
+        dispatch(
+          {
+            type: 'extra', 
+            payload: {
+              total: e.target.checked ? existingInfo.total + 10 : existingInfo.total - 10,
+              name: 'discoBalls', 
+              checkedState: e.target.checked
+            }
+          })
         break
       case 'treeTrunk':
-        dispatch({type: 'extra', payload: {total : e.target.checked ? existingInfo.total + 20 : existingInfo.total - 20}})
+        dispatch(
+          {
+            type: 'extra', 
+            payload: {
+              total: e.target.checked ? existingInfo.total + 20 : existingInfo.total - 20,
+              name: 'treeTrunk',
+              checkedState: e.target.checked
+            }
+          })
         break
       case 'bows':
-        dispatch({type: 'extra', payload: {total : e.target.checked ? existingInfo.total + 2 : existingInfo.total - 2}})
+        dispatch({
+          type: 'extra', 
+          payload: {
+            total: e.target.checked ? existingInfo.total + 2 : existingInfo.total - 2,
+            name: 'bows',
+            checkedState: e.target.checked
+          }
+        })
+        break
+      case 'freshFruit':
+        dispatch({
+          type: 'extra',
+          payload: {
+            name: 'freshFruit',
+            total: existingInfo.total,
+            checkedState: e.target.schecked
+          }
+        })
     }
   }
 
@@ -43,11 +84,11 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     const other = formData.get('other');
     const fillingFlavor = formData.get('fillingFlavor');
     const extras = {
-      glitterCherries: formData.get('glitterCherries'),
-      discoBalls: formData.get('discoBalls'),
-      treeTrunk: formData.get('treeTrunk'),
-      bows: formData.get('bows'),
-      freshFruit: formData.get('freshFruit')
+      glitterCherries: formData.get('glitterCherries') === "on" ? true : false,
+      discoBalls: formData.get('discoBalls') === "on" ? true : false,
+      treeTrunk: formData.get('treeTrunk') === "on" ? true : false,
+      bows: formData.get('bows') === "on" ? true : false,
+      freshFruit: formData.get('freshFruit') === "on" ? true : false
     }
     const cakeDetails = {
       cakeFlavor,
@@ -78,19 +119,21 @@ export default function Flavors({dispatch, warnings, existingInfo}){
   }
 
   return (
-    <form className="overflow-auto overscroll-contain" action={next}>
-      <div className="mb-6">
-        <label htmlFor="cakeFlavor" className="ml-3 mb-2">What flavor cake?</label>
+    <form className="overflow-auto overscroll-contain lg:grid lg:grid-cols-2 ml-6 flex flex-col gap-6" action={next}>
+      <div>
+        <p className="text-red-400">{warnings.cakeFlavor}</p>
+        <label htmlFor="cakeFlavor" className="font-semibold">What flavor cake?</label>
         <select className="select select-bordered w-full max-w-xs" 
                 name="cakeFlavor" 
                 defaultValue={existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.cakeFlavor : 'placeholder'} >
           <option disabled value={'placeholder'}>Choose a cake flavor</option>
           {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
         </select>
-        <p className="text-sm ml-3">Some are combinable upon request</p>
+        <p className="text-sm ml-3 font-thin">Some are combinable upon request</p>
       </div>
-      <div className="mb-6">
-        <label className="ml-3 mb-2">Frosting type:</label>
+      <div>
+        <p className="text-red-400">{warnings.frostingType}</p>
+        <label className="mb-2 font-semibold">Frosting type:</label>
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="frostingType" 
@@ -119,8 +162,9 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           <label htmlFor="cc" className="ml-6">Cream Cheese (not available for heavily piped cakes)</label>
         </div>
       </div>
-      <div className="mb-6">
-        <label className="ml-3 mb-2">What flavor frosting?</label>
+      <div>
+        <p className="text-red-400">{warnings.frostingFlavor}</p>
+        <label className="mb-2 font-semibold">What flavor frosting?</label>
         <select className="select select-bordered w-full max-w-xs"
                 name="frostingFlavor" 
                 defaultValue={existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.frostingFlavor : 'placeholder'}>
@@ -128,11 +172,11 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
         </select>
       </div>
-      <div className="mb-6">
-        <label>Filling Type</label>
+      <div>
+        <label className="font-semibold mb-6">Filling Type</label>
         <div className="mb-2 flex items-center"> 
           <input type="radio" 
-                 name="fillingType" c
+                 name="fillingType"
                  className="radio radio-secondary" 
                  value="Ganache" 
                  onChange={(e)=>handleOther(e)}
@@ -190,21 +234,21 @@ export default function Flavors({dispatch, warnings, existingInfo}){
                          className="input input-bordered input-sm input-info w-full max-w-xs"
                          defaultValue={existingInfo.cakeDetails?.fillingType === 'other' ? existingInfo.cakeDetails.other : ''}/>}
       </div>
-      <div className="my-6">
-        <label>What flavor filling?</label>
+      <div>
+        <label className="font-semibold">What flavor filling?</label>
         <input type="text" 
                placeholder="Type here" 
                className="input input-bordered input-accent w-full max-w-xs" 
                name="fillingFlavor"
                defaultValue={existingInfo.cakeDetails?.fillingFlavor ?? ''}/>
       </div>
-      <div className="mb-6">
-          <label>Extras</label>
+      <div>
+          <label className="font-semibold">Extras:</label>
           <div className="display flex w-5/6">
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
                    name="glitterCherries" 
-                   defaultChecked={existingInfo.cakeDetails?.extras?.glitterCherries === 'on'}
+                   defaultChecked={existingInfo.cakeDetails?.extras?.glitterCherries === true}
                    onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Glitter cherries +$5</label>
           </div>
@@ -212,7 +256,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
                    name="discoBalls"
-                   defaultChecked={existingInfo.cakeDetails?.extras?.discoBalls === 'on'}
+                   defaultChecked={existingInfo.cakeDetails?.extras?.discoBalls === true}
                    onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Disco balls +$10</label>
           </div>
@@ -220,7 +264,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
                    name="treeTrunk" 
-                   defaultChecked={existingInfo.cakeDetails?.extras?.treeTrunk === 'on'}
+                   defaultChecked={existingInfo.cakeDetails?.extras?.treeTrunk === true}
                    onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Tree Trunk Style +$20</label>
           </div>
@@ -228,7 +272,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
                    name="bows"
-                   defaultChecked={existingInfo.cakeDetails?.extras?.bows === 'on'}
+                   defaultChecked={existingInfo.cakeDetails?.extras?.bows === true}
                    onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Keepsake bows +$2 each</label>
           </div>
@@ -236,13 +280,15 @@ export default function Flavors({dispatch, warnings, existingInfo}){
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
                    name="freshFruit"
-                   defaultChecked={existingInfo.cakeDetails?.extras?.freshFruit === 'on'}
+                   defaultChecked={existingInfo.cakeDetails?.extras?.freshFruit === true}
                    onClick={(e)=>extraHandler(e)}/>
             <label className="ml-6">Fresh fruit +Market Price</label>
           </div>
       </div>
-      <button type="button" className="btn btn-warn" onClick={prev}>Previous</button>
-      <button type="submit" className="btn btn-primary">Next</button>
+      <div className="flex justify-between">
+        <button type="button" className="btn btn-warn" onClick={prev}>Previous</button>
+        <button type="submit" className="btn btn-primary">Next</button>
+      </div>
     </form>
   )
 }

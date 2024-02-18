@@ -10,13 +10,13 @@ export default function ContactInfo({dispatch, warnings, existingInfo}){
     if(!firstName){
       dispatch({type: 'warn', payload: {firstName: 'First Name Required'}})
     } 
-    if(!lastName){
+    else if(!lastName){
       dispatch({type: 'warn', payload: {lastName: 'Last Name Required'}})
     }
-    if(!email){
+    else if(!email){
       dispatch({type: 'warn', payload: {email: 'Email Required'}})
     }
-    if(!phoneNumber){
+    else if(!phoneNumber){
       dispatch({type: 'warn', payload: {phoneNumber: "Phone Number Required"}})
     }
     else {
@@ -32,19 +32,19 @@ export default function ContactInfo({dispatch, warnings, existingInfo}){
   } 
 
   return (
-    <form action={next}>
+    <form action={next} className="flex flex-col">
     
-    <div className="join join-vertical">
-      <label htmlFor="firstName" className={warnings.firstName ? "text-red-200" : "text-black"}>{warnings.firstName ? warnings.firstName : "First Name"}</label>
-      <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="firstName" defaultValue={existingInfo.contactInfo?.firstName ?? ''}/>
-      <label htmlFor="lastName" className={warnings.lastName ? "text-red-200" : "text-black"}>{warnings.lastName ? warnings.lastName : "Last Name"}</label>
-      <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="lastName" defaultValue={existingInfo.contactInfo?.lastName ?? ''}/>
-      <label htmlFor="email" className={warnings.email ? "text-red-200" : "text-black"}>{warnings.email ? warnings.email : "Email"}</label>
-      <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="email" defaultValue={existingInfo.contactInfo?.email ?? ''}/>
-      <label htmlFor="phoneNumber" className={warnings.phoneNumber ? "text-red-200" : "text-black"}>{warnings.phoneNumber ? warnings.phoneNumber : "Phone Number"}</label>
-      <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="phoneNumber" defaultValue={existingInfo.contactInfo?.phoneNumber ?? ''}/>
-      <button className="btn btn-primary w-1/3 flex self-end m-6">Next</button>
-    </div>
+      <div className="join join-vertical">
+        <label htmlFor="firstName" className={warnings.firstName ? "text-red-400" : "text-black"}>{warnings.firstName ? warnings.firstName : "First Name"}</label>
+        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="firstName" defaultValue={existingInfo.contactInfo?.firstName ?? ''}/>
+        <label htmlFor="lastName" className={warnings.lastName ? "text-red-400" : "text-black"}>{warnings.lastName ? warnings.lastName : "Last Name"}</label>
+        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="lastName" defaultValue={existingInfo.contactInfo?.lastName ?? ''}/>
+        <label htmlFor="email" className={warnings.email ? "text-red-400" : "text-black"}>{warnings.email ? warnings.email : "Email"}</label>
+        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="email" defaultValue={existingInfo.contactInfo?.email ?? ''}/>
+        <label htmlFor="phoneNumber" className={warnings.phoneNumber ? "text-red-400" : "text-black"}>{warnings.phoneNumber ? warnings.phoneNumber : "Phone Number"}</label>
+        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="phoneNumber" defaultValue={existingInfo.contactInfo?.phoneNumber ?? ''}/>
+      </div>
+      <button className="btn btn-primary w-1/3 flex self-end mt-8">Next</button>
     </form>
   )
 }
