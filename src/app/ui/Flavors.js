@@ -5,11 +5,22 @@ import { useState } from "react";
 
 export default function Flavors({dispatch, warnings, existingInfo}){
 
-  const flavors = ['Chocolate', 'Vanilla', 'Strawberry', 'Ube', 'Pandan', 'Fig', 'Black Sesame', 'Rosemary', 'Brown Butter', 'Espresso', 'Red Velvet', 
+  const flavors = ['Write In', 'Chocolate', 'Vanilla', 'Strawberry', 'Ube', 'Pandan', 'Fig', 'Black Sesame', 'Rosemary', 'Brown Butter', 'Espresso', 'Red Velvet', 
   'Hummingbird', 'Matcha', 'Lemon', 'Lime', 'Orange', 'Yuzu', 'Lavender', 'Earl Grey', 'Coconut', 'Carrot', 'Golden Milk', 'Mixed Berry', 'Tamarind', 
   'Banana', 'Mountain Dew', 'Cornmeal', 'Honey', 'Chai', 'Peach', 'Lychee']
 
-  const [other, setOther] = useState(existingInfo.cakeDetails?.fillingType === 'other' ? true : false)
+  const [other, setOther] = useState(existingInfo.cakeDetails?.fillingType === 'other' ? true : false);
+  const [cakeFlavor, setCakeFlavor] = useState(existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.cakeFlavor : 'placeholder');
+  const [frostingFlavor, setFrostingFlavor] = useState(existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.frostingFlavor : 'placeholder');
+
+
+  function flavorPicker(e){
+    setCakeFlavor(e.target.value)
+  }
+  function frostingPicker(e){
+    setFrostingFlavor(e.target.value)
+  }
+
   function handleOther(e){
     setOther(()=>{
       return e.target.value === 'other' ? true : false;
@@ -83,6 +94,9 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     const fillingType = formData.get('fillingType');
     const other = formData.get('other');
     const fillingFlavor = formData.get('fillingFlavor');
+    const writeInCakeFlavor = formData.get('writeInCakeFlavor');
+    const writeInFrostingFlavor = formData.get('writeInFrostingFlavor');
+
     const extras = {
       glitterCherries: formData.get('glitterCherries') === "on" ? true : false,
       discoBalls: formData.get('discoBalls') === "on" ? true : false,
@@ -92,8 +106,10 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     }
     const cakeDetails = {
       cakeFlavor,
+      writeInCakeFlavor: writeInCakeFlavor ? writeInCakeFlavor : '',
       frostingType,
       frostingFlavor,
+      writeInFrostingFlavor: writeInFrostingFlavor ? writeInFrostingFlavor : '',
       fillingType,
       other,
       fillingFlavor,
@@ -123,13 +139,19 @@ export default function Flavors({dispatch, warnings, existingInfo}){
       <div>
         <p className="text-red-400">{warnings.cakeFlavor}</p>
         <label htmlFor="cakeFlavor" className="font-semibold">What flavor cake?</label>
+        <p className="text-sm font-thin">Some are combinable upon request</p>
         <select className="select select-bordered w-full max-w-xs" 
                 name="cakeFlavor" 
-                defaultValue={existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.cakeFlavor : 'placeholder'} >
+                value={cakeFlavor} 
+                onChange={flavorPicker} >
           <option disabled value={'placeholder'}>Choose a cake flavor</option>
           {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
         </select>
-        <p className="text-sm ml-3 font-thin">Some are combinable upon request</p>
+        {cakeFlavor === 'Write In' && <input type="text" 
+                         name="writeInCakeFlavor" 
+                         placeholder="Please type another option here" 
+                         className="input input-bordered input-sm input-info w-full max-w-xs"
+                         defaultValue={existingInfo.cakeDetails?.writeInCakeFlavor ? existingInfo.cakeDetails.writeInCakeFlavor : ''}/>}
       </div>
       <div>
         <p className="text-red-400">{warnings.frostingType}</p>
@@ -167,10 +189,16 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <label className="mb-2 font-semibold">What flavor frosting?</label>
         <select className="select select-bordered w-full max-w-xs"
                 name="frostingFlavor" 
-                defaultValue={existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.frostingFlavor : 'placeholder'}>
+                value={frostingFlavor}
+                onChange={frostingPicker}>
           <option disabled value="placeholder" >Choose a frosting flavor</option>
           {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
         </select>
+        {frostingFlavor === 'Write In' && <input type="text" 
+                         name="writeInFrostingFlavor" 
+                         placeholder="Please type another option here" 
+                         className="input input-bordered input-sm input-info w-full max-w-xs"
+                         defaultValue={existingInfo.cakeDetails?.writeInFrostingFlavor ? existingInfo.cakeDetails.writeInFrostingFlavor : ''}/>}
       </div>
       <div>
         <label className="font-semibold mb-6">Filling Type</label>
@@ -178,55 +206,61 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           <input type="radio" 
                  name="fillingType"
                  className="radio radio-secondary" 
-                 value="Ganache" 
+                 value="Ganache"
+                 id="ganache" 
                  onChange={(e)=>handleOther(e)}
                  defaultChecked={existingInfo.cakeDetails?.fillingType === 'Ganache'}/>
-          <label className="ml-6">Ganache</label>
+          <label className="ml-6" htmlFor="ganache">Ganache</label>
         </div>
         <div className="mb-2 flex items-center">
           <input type="radio" 
                 name="fillingType" 
                 className="radio radio-secondary" 
-                value="Curd" 
+                value="Curd"
+                id="cured" 
                 onChange={(e)=>handleOther(e)}
                 defaultChecked={existingInfo.cakeDetails?.fillingType === 'Curd'}/>
-          <label className="ml-6">Curd</label>
+          <label className="ml-6" htmlFor="curd">Curd</label>
         </div>
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="fillingType" 
                  className="radio radio-secondary" 
-                 value="Jam" 
+                 value="Jam"
+                 id="jam" 
                  onChange={(e)=>handleOther(e)}
                  defaultChecked={existingInfo.cakeDetails?.fillingType === 'Jam'}/>
-          <label className="ml-6">Jam</label>
+          <label className="ml-6" htmlFor="jam">Jam</label>
         </div>
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="fillingType" 
                  className="radio radio-secondary" 
-                 value="Cream Cheese" 
+                 value="Cream Cheese"
+                 id="creamCheese" 
                  onChange={(e)=>handleOther(e)}
                  defaultChecked={existingInfo.cakeDetails?.fillingType === 'Cream Cheese'}/>
-          <label className="ml-6">Cream Cheese</label>
+          <label className="ml-6" htmlFor="creamCheese">Cream Cheese</label>
         </div>
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="fillingType" 
                  className="radio radio-secondary" 
-                 value="Fresh Fruit" 
+                 value="Fresh Fruit"
+                 id="freshFruit" 
                  onChange={(e)=>handleOther(e)}
                  defaultChecked={existingInfo.cakeDetails?.fillingType === 'Fresh Fruit'}/>
-          <label className="ml-6">Fresh Fruit</label>
+          <label className="ml-6" htmlFor="freshFruit">Fresh Fruit</label>
         </div>
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="fillingType" 
                  className="radio radio-secondary" 
-                 value="other" 
+                 value="other"
+                 id="otherRadio" 
                  onChange={(e)=>handleOther(e)} 
                  defaultChecked={existingInfo.cakeDetails?.fillingType === 'other'}/>
-          <label className="ml-6">Other</label>
+          <label className="ml-6" htmlFor="otherRadio">Other</label>
         </div>
         {other && <input type="text" 
                          name="other" 
@@ -236,6 +270,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
       </div>
       <div>
         <label className="font-semibold">What flavor filling?</label>
+        <p className="text-sm font-thin">Fruit, chocolate, matcha, etc</p>
         <input type="text" 
                placeholder="Type here" 
                className="input input-bordered input-accent w-full max-w-xs" 
@@ -247,42 +282,38 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           <div className="display flex w-5/6">
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
-                   name="glitterCherries" 
+                   name="glitterCherries"
+                   id="glCherries" 
                    defaultChecked={existingInfo.cakeDetails?.extras?.glitterCherries === true}
                    onClick={(e)=>extraHandler(e)}/>
-            <label className="ml-6">Glitter cherries +$5</label>
+            <label className="ml-6" htmlFor="glCherries">Glitter cherries +$5</label>
           </div>
           <div className="display flex w-5/6">
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
                    name="discoBalls"
+                   id="dBalls"
                    defaultChecked={existingInfo.cakeDetails?.extras?.discoBalls === true}
                    onClick={(e)=>extraHandler(e)}/>
-            <label className="ml-6">Disco balls +$10</label>
-          </div>
-          <div className="display flex w-5/6">
-            <input type="checkbox" 
-                   className="checkbox checkbox-secondary" 
-                   name="treeTrunk" 
-                   defaultChecked={existingInfo.cakeDetails?.extras?.treeTrunk === true}
-                   onClick={(e)=>extraHandler(e)}/>
-            <label className="ml-6">Tree Trunk Style +$20</label>
+            <label className="ml-6" htmlFor="dBalls">Disco balls +$10</label>
           </div>
           <div className="display flex w-5/6">
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
                    name="bows"
+                   id="xBows"
                    defaultChecked={existingInfo.cakeDetails?.extras?.bows === true}
                    onClick={(e)=>extraHandler(e)}/>
-            <label className="ml-6">Keepsake bows +$2 each</label>
+            <label className="ml-6" htmlFor="xBows">Keepsake bows +$2 each</label>
           </div>
           <div className="display flex w-5/6">
             <input type="checkbox" 
                    className="checkbox checkbox-secondary" 
                    name="freshFruit"
+                   id="frFruit"
                    defaultChecked={existingInfo.cakeDetails?.extras?.freshFruit === true}
                    onClick={(e)=>extraHandler(e)}/>
-            <label className="ml-6">Fresh fruit +Market Price</label>
+            <label className="ml-6" htmlFor="frFruit">Fresh fruit +Market Price</label>
           </div>
       </div>
       <div className="flex justify-between">
