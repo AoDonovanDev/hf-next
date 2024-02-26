@@ -32,8 +32,8 @@ export async function submit(formData){
   try {
     const data = await resend.emails.send({
       from: 'HF <hank@houseflyvictuals.com>',
-      to: ['aodonovancodes@gmail.com'],
-      subject: 'Order received',
+      to: [formData.contactInfo.email],
+      subject: 'Order Received',
       react: <OrderReceivedNotice firstName={formData.contactInfo.firstName} hfEmail={"houseflyvictuals@gmail.com"} estimatedTotal={`$${formData.total}.00`} />
     });
     console.log(data)

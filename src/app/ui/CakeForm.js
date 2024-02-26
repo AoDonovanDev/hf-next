@@ -118,10 +118,9 @@ export default function CakeForm(){
         extras: {
         glitterCherries: null,
         discoBalls: null,
-        treeTrunk: null,
         bows: null,
-      }
-      }
+        }
+      },
     },
   })
 

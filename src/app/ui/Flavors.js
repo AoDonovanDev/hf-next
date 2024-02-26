@@ -5,9 +5,9 @@ import { useState } from "react";
 
 export default function Flavors({dispatch, warnings, existingInfo}){
 
-  const flavors = ['Write In', 'Chocolate', 'Vanilla', 'Strawberry', 'Ube', 'Pandan', 'Fig', 'Black Sesame', 'Rosemary', 'Brown Butter', 'Espresso', 'Red Velvet', 
+  const flavors = ['Chocolate', 'Vanilla', 'Strawberry', 'Ube', 'Pandan', 'Fig', 'Black Sesame', 'Rosemary', 'Brown Butter', 'Espresso', 'Red Velvet', 
   'Hummingbird', 'Matcha', 'Lemon', 'Lime', 'Orange', 'Yuzu', 'Lavender', 'Earl Grey', 'Coconut', 'Carrot', 'Golden Milk', 'Mixed Berry', 'Tamarind', 
-  'Banana', 'Mountain Dew', 'Cornmeal', 'Honey', 'Chai', 'Peach', 'Lychee']
+  'Banana', 'Mountain Dew', 'Cornmeal', 'Honey', 'Chai', 'Peach', 'Lychee', 'Other']
 
   const [other, setOther] = useState(existingInfo.cakeDetails?.fillingType === 'other' ? true : false);
   const [cakeFlavor, setCakeFlavor] = useState(existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.cakeFlavor : 'placeholder');
@@ -111,7 +111,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
       frostingFlavor,
       writeInFrostingFlavor: writeInFrostingFlavor ? writeInFrostingFlavor : '',
       fillingType,
-      other,
+      other: other ? other : '',
       fillingFlavor,
       extras
     }
@@ -147,7 +147,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           <option disabled value={'placeholder'}>Choose a cake flavor</option>
           {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
         </select>
-        {cakeFlavor === 'Write In' && <input type="text" 
+        {cakeFlavor === 'Other' && <input type="text" 
                          name="writeInCakeFlavor" 
                          placeholder="Please type another option here" 
                          className="input input-bordered input-sm input-info w-full max-w-xs"
@@ -194,7 +194,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           <option disabled value="placeholder" >Choose a frosting flavor</option>
           {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
         </select>
-        {frostingFlavor === 'Write In' && <input type="text" 
+        {frostingFlavor === 'Other' && <input type="text" 
                          name="writeInFrostingFlavor" 
                          placeholder="Please type another option here" 
                          className="input input-bordered input-sm input-info w-full max-w-xs"
