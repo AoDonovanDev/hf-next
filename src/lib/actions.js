@@ -3,6 +3,7 @@
 import { Resend } from "resend";
 import { unstable_noStore } from "next/cache";
 import OrderReceivedNotice from "@/emails/OrderReceivedNotice";
+import OrderDetails from "@/emails/OrderDetail";
 
 export async function upload(b64Img){
   const cut = 'data:image/png;base64,'
@@ -37,8 +38,23 @@ export async function submit(formData){
       react: <OrderReceivedNotice firstName={formData.contactInfo.firstName} hfEmail={"houseflyvictuals@gmail.com"} estimatedTotal={`$${formData.total}.00`} />
     });
     console.log(data)
+    const adminEmail = await resend.emails.send({
+      from: 'HF <hank@houseflyvictuals.com>',
+      to: process.env.ADMIN_EMAIL,
+      subject: 'New Order',
+      react: <OrderDetails total={formData.total}
+                           cakeDetails={formData.cakeDetails}
+                           cakeSize={formData.cakeSize}
+                           cakeType={formData.cakeType}
+                           contactInfo={formData.contactInfo}
+                           pickupDetails={formData.pickupDetails}
+                           preferences={formData.preferences}
+                           imgUrl={formData.imgUrl}/>
+    })
+    console.log(adminEmail)
   } catch (error) {
     console.log(error)
     return error ;
   }
+
 }

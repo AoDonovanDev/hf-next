@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/node": "20.11.4",
     "@types/react": "18.2.48",
+    "@types/uuid4": "^2.0.3",
     "autoprefixer": "^10.0.1",
     "daisyui": "^4.4.24",
     "eslint": "^8",

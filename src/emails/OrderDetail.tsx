@@ -15,6 +15,7 @@ import {
   Row
 } from '@react-email/components';
 import * as React from 'react';
+import uuid4 from "uuid4";
 
 interface Extras {
   bows: boolean,
@@ -61,41 +62,18 @@ interface OrderDetails {
 
 
 export const OrderDetails = ({
-  total = 80,
-  cakeDetails = {
-    cakeFlavor: 'Other',
-    fillingFlavor: 'matcha',
-    fillingType: 'ganache',
-    frostingFlavor: 'vanilla',
-    frostingType: 'American Buttercream',
-    other: '',
-    writeInCakeFlavor: 'beans',
-    writeInFrostingFlavor: '',
-    extras: {
-      bows: true,
-      discoBalls: true,
-      freshFruit: false,
-      glitterCherries: false,
-      }
-  },
-  cakeSize = '6',
-  cakeType = 'custom',
-  contactInfo = {
-    firstName: 'Burt',
-    lastName: 'Donovan',
-    email: 'burtyboy@gmail.com',
-    phoneNumber: '4232821708'
-  },
-  pickupDetails= {
-    date:  'Sat Mar 02 2024 00:00:00 GMT-0500 (Eastern Standard Time)',
-    pickupTime: '2:30pm'
-  },
-  preferences = "please make it good, like real good style",
-  imgUrl= ''
+  total,
+  cakeDetails,
+  cakeSize,
+  cakeType ,
+  contactInfo,
+  pickupDetails,
+  preferences,
+  imgUrl
 } : OrderDetails) => {
 
   const previewText = "You have a new order!"
-  const xtras = Object.keys(cakeDetails.extras).filter(x => cakeDetails.extras[x]===true).map((x,i) => (<>{i != 0 ? <Hr/> : <></>}<Row><Text className="m-0 p-2">{x}</Text></Row></>));
+  const xtras = Object.keys(cakeDetails.extras).filter(x => cakeDetails.extras[x]===true).map((x,i) => (<div key={uuid4()}>{i != 0 ? <Hr/> : <></>}<Row><Text className="m-0 p-2">{x}</Text></Row></div>));
 
 
   return (
@@ -180,8 +158,8 @@ export const OrderDetails = ({
                 <Hr/>
                 <Row><Text className="m-0 p-2">Pickup Time</Text></Row>
               </Column>
-              <Column className='border border-solid border-[#eaeaea] border-r-0'>
-                <Row><Text className="m-0 p-2">{pickupDetails.date}</Text></Row>
+              <Column className='border border-solid border-[#eaeaea] border-l-0'>
+                <Row><Text className="m-0 p-2">{pickupDetails.date.slice(0,9)}</Text></Row>
                 <Hr/>
                 <Row><Text className="m-0 p-2">{pickupDetails.pickupTime}</Text></Row>
               </Column>
