@@ -81,7 +81,7 @@ export const OrderDetails = ({
       <Head />
       <Preview>{previewText}</Preview>
       <Tailwind>
-        <Body className="bg-white my-auto mx-auto font-sans w-5/6 flex">
+        <Body className="bg-white my-auto mx-auto font-sans w-full flex">
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px] flex flex-col items-center gap-6">          
             <Heading className='text-center'>New Order</Heading>
             <Text className='text-md font-bold'>Cake Details:</Text>
