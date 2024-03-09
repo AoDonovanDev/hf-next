@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#database creation api route
+/src/app/api
+
 # dependencies
 /node_modules
 /.pnp
@@ -42,3 +45,5 @@ next-env.d.ts
 # todo
 todo.md
 
+
+.vercel

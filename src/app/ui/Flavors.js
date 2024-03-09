@@ -100,7 +100,6 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     const extras = {
       glitterCherries: formData.get('glitterCherries') === "on" ? true : false,
       discoBalls: formData.get('discoBalls') === "on" ? true : false,
-      treeTrunk: formData.get('treeTrunk') === "on" ? true : false,
       bows: formData.get('bows') === "on" ? true : false,
       freshFruit: formData.get('freshFruit') === "on" ? true : false
     }

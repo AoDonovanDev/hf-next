@@ -1,13 +1,24 @@
 import DatePicker from "react-datepicker"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getDay } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
+import { getCakeDays } from "../../lib/actions";
 
 
 export default function Pickup({dispatch, existingInfo, warnings}){
 
   const [startDate, setStartDate] = useState(existingInfo.pickupDetails?.date ? new Date(existingInfo.pickupDetails.date) : '');
   const [time, setTime] = useState(existingInfo.pickupDetails?.pickupTime ? existingInfo.pickupDetails.pickupTime : null);
+  const [cakeDays, setCakeDays] = useState('');
+
+  useEffect(() => {
+    (async() => {
+      const { cakeDays } = await getCakeDays();
+      setCakeDays(cakeDays.rows.filter(r => !r.available).map(r => new Date(r.date)));
+    })();
+  }, [])
+
+  console.log(cakeDays)
   const isOffDay = (date) => {
     const day = getDay(date);
     return day === 5 || day === 6;
@@ -62,6 +73,7 @@ export default function Pickup({dispatch, existingInfo, warnings}){
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           filterDate={isOffDay}
+          excludeDates={cakeDays}
           minDate={new Date()}
           placeholderText="Select a day for pickup"
           form="external-form"

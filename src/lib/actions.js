@@ -2,8 +2,10 @@
 
 import { Resend } from "resend";
 import { unstable_noStore } from "next/cache";
+import { QueryResult, sql } from '@vercel/postgres';
 import OrderReceivedNotice from "@/emails/OrderReceivedNotice";
 import OrderDetails from "@/emails/OrderDetail";
+import { addCake, addCustomer, addOrder, addCakeDay } from "./queries";
 
 export async function upload(b64Img){
   const cut = 'data:image/png;base64,'
@@ -51,10 +53,27 @@ export async function submit(formData){
                            preferences={formData.preferences}
                            imgUrl={formData.imgUrl}/>
     })
-    console.log(adminEmail)
   } catch (error) {
     console.log(error)
     return error ;
   }
 
+  const {total, cakeSize, cakeType, preferences, imgUrl} = formData;
+  const {date, pickupTime} = formData.pickupDetails;
+  const cake = await addCake({cakeSize, cakeType, preferences, imgUrl, ...formData.cakeDetails});
+  const customer = await addCustomer(formData.contactInfo);
+  const order = await addOrder({customerId: customer.rows[0].id, cakeId: cake.rows[0].id, date, pickupTime, total});
+  const cakeDay = await addCakeDay(date);
 }
+
+export async function getCakeDays(){
+  unstable_noStore();
+  try {
+    const cakeDays = await sql`SELECT * FROM Cake_Days`;
+    return {cakeDays};
+  } catch {
+    console.log(error);
+  }
+}
+
+
