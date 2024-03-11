@@ -88,7 +88,6 @@ export async function setAdminCookie(formData){
 
 export async function isAuthorized(){
   const adminCookie = cookies().get("hfa");
-  console.log('adminCookie in isAuthorized action', adminCookie)
   if(!adminCookie?.value) return false;
   const passCheck = await fetch('http://localhost:3000/admin/auth', {
     cache: "no-cache",

@@ -1,5 +1,5 @@
 import { pullOrders } from "@/lib/actions";
-import AdminDash from "C:/Users/aodon/repos/hf-next/src/app/ui/AdminDash.js";
+import AdminDash from "@/ui/AdminDash";
 
 export default async function Page() {
   

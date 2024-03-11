@@ -13,8 +13,6 @@ export default function AdminDash( { allOrders }) {
 
   const orders = allOrders.filter(o => o.status === status);
 
-  console.log(orders)
-  console.log('status param in page component', status)
 
   function next(){
     setI(i+1);
