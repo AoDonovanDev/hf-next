@@ -28,7 +28,7 @@ export default function AdminDash( { allOrders }) {
   }
 
   return (
-     <div className="h-5/6 overflow-auto overscroll-contain">
+     <div className="h-5/6 overflow-auto overscroll-contain" style={{WebkitOverflowScrolling: "touch"}}>
        {orders.length && <>
         <div className="stats shadow w-full text-center m-0 flex divide-x-0">
           {i > 0 && <Image src={"/prevArrow2.svg"} height={60} width={60} alt="prevArrow" className="btn self-center" onClick={()=>prev()}/>}
