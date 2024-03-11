@@ -4,7 +4,7 @@ import { isAuthorized } from "@/lib/actions";
 export async function middleware(req) {
   const { authorized } = await isAuthorized();
   if(!authorized){
-    return NextResponse.redirect("http://localhost:3000/");
+    return NextResponse.redirect(`${process.env.BASE_URL}`);
   } else {
     return NextResponse.next();
   } 
