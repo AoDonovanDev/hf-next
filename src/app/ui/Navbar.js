@@ -1,12 +1,11 @@
 import Link from "next/link"
 import Image from "next/image"
-import { isAuthorized } from "@/lib/actions";
+import { isAuthenticated } from "../../lib/actions"
 
 export default async function Navbar(){
 
   
-  const admin = await isAuthorized();
-  console.log('navbar', admin)
+  const admin = await isAuthenticated();
 
   return (
     <div className="navbar bg-base-200">

@@ -1,13 +1,28 @@
 import { NextResponse } from 'next/server';
-import { isAuthorized } from "@/lib/actions";
+import { cookies } from 'next/headers';
 
 export async function middleware(req) {
-  const { authorized } = await isAuthorized();
-  if(!authorized){
-    return NextResponse.redirect(`${process.env.BASE_URL}`);
-  } else {
-    return NextResponse.next();
-  } 
+
+  const token = cookies().get("hfa");
+  console.log(token)
+  if(!token){
+    return NextResponse.redirect(`${process.env.BASE_URL}/`);
+  }
+  try {
+    const response = await fetch(`${process.env.BASE_URL}/admin/auth`, {
+      method: "POST",
+      cache: 'no-cache',
+      body: JSON.stringify({token: token.value})
+    })
+    const { admin } = await response.json();
+    if(!admin){
+      return NextResponse.redirect(`${process.env.BASE_URL}/`);
+    } else {
+      return NextResponse.next();
+    }
+  } catch(e){
+    return NextResponse.redirect(`${process.env.BASE_URL}/`);
+  }
 }
  
 export const config = {

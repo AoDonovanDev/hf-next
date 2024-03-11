@@ -10,6 +10,7 @@ import { cookies } from 'next/headers';
 import { redirect } from "next/navigation";
 import jwt from 'jsonwebtoken';
 import { revalidatePath } from "next/cache";
+import bcrypt from 'bcrypt';
 
 export async function upload(b64Img){
   const cut = 'data:image/png;base64,'
@@ -80,22 +81,28 @@ export async function getCakeDays(){
   }
 }
 
-export async function setAdminCookie(formData){
-  const token = jwt.sign({raw: formData.get('pwd')}, process.env.JWT_SECRET);
-  cookies().set("hfa", token);
-  redirect('/dashboard/new');
+export async function login(formData){
+  const admin = await sql`SELECT password FROM Users WHERE id=1`;
+  const authorized = await bcrypt.compare(formData.get('pwd'), admin.rows[0].password);
+  if(authorized){
+    const token = jwt.sign({
+      user: "theOnlyUser",
+      admin: true
+    }, process.env.JWT_SECRET)
+    cookies().set("hfa", token);
+    redirect('/dashboard/new');
+  } else {
+    redirect('/');
+  }
 }
 
-export async function isAuthorized(){
-  const adminCookie = cookies().get("hfa");
-  if(!adminCookie?.value) return false;
-  const passCheck = await fetch(`${process.env.BASE_URL}/admin/auth`, {
-    cache: "no-cache",
-    method: "POST",
-    body: JSON.stringify({adminCookie: adminCookie.value})
-  });
-  const authorized = await passCheck.json();
-  return authorized;
+export async function isAuthenticated(){
+  const token = cookies().get("hfa");
+  if(!token?.value){
+    return false
+  }
+  const { admin } = jwt.verify(token.value, process.env.JWT_SECRET);
+  return admin;
 }
 
 export async function pullOrders(status){
