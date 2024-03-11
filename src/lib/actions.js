@@ -2,10 +2,14 @@
 
 import { Resend } from "resend";
 import { unstable_noStore } from "next/cache";
-import { QueryResult, sql } from '@vercel/postgres';
+import { sql } from '@vercel/postgres';
 import OrderReceivedNotice from "@/emails/OrderReceivedNotice";
 import OrderDetails from "@/emails/OrderDetail";
 import { addCake, addCustomer, addOrder, addCakeDay } from "./queries";
+import { cookies } from 'next/headers';
+import { redirect } from "next/navigation";
+import jwt from 'jsonwebtoken';
+import { revalidatePath } from "next/cache";
 
 export async function upload(b64Img){
   const cut = 'data:image/png;base64,'
@@ -76,4 +80,45 @@ export async function getCakeDays(){
   }
 }
 
+export async function setAdminCookie(formData){
+  const token = jwt.sign({raw: formData.get('pwd')}, process.env.JWT_SECRET);
+  cookies().set("hfa", token);
+  redirect('/dashboard/new');
+}
+
+export async function isAuthorized(){
+  const adminCookie = cookies().get("hfa");
+  console.log('adminCookie in isAuthorized action', adminCookie)
+  if(!adminCookie?.value) return false;
+  const passCheck = await fetch('http://localhost:3000/admin/auth', {
+    cache: "no-cache",
+    method: "POST",
+    body: JSON.stringify({adminCookie: adminCookie.value})
+  });
+  const authorized = await passCheck.json();
+  return authorized;
+}
+
+export async function pullOrders(status){
+  unstable_noStore();
+
+  const orders = await sql`
+      SELECT Orders.id AS order_id, * FROM Orders 
+      INNER JOIN cakes c ON Orders.cake = c.id
+      INNER JOIN customers cu ON Orders.customer = cu.id;
+      `
+  return orders.rows;
+} 
+
+export async function updateOrderStatus(order_id, target, current){
+  unstable_noStore();
+
+  const update = await sql`UPDATE Orders SET status = ${target} where Orders.id = ${order_id};`;
+  revalidatePath(`/dashboard/${current}`);
+}
+
+export async function logout(){
+  cookies().delete("hfa");
+  redirect("/");
+}
 

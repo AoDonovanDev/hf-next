@@ -5,6 +5,14 @@ const nextConfig = {
       bodySizeLimit: '8mb',
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co'
+      }
+    ]
+  }
 
 }
 
