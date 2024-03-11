@@ -134,7 +134,7 @@ export default function AdminDash( { allOrders }) {
           {orders[i].reference_img && <Image src={orders[i].reference_img} height={200} width={200} alt="reference" />}
         </div>
        </>}
-      <div className="flex flex-row justify-between mx-2 my-24 items-center">        
+      <div className="flex flex-row justify-between mx-2 mb-32 mt-6 items-center">        
           <Image src={"/rejectPink.svg"} height={70} width={70} alt="thumbDown" className="btn" id="rejected" onClick={()=>update(orders[i].order_id, 'rejected', status)}/>      
           <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbUp" className="btn" id="pending" onClick={()=>update(orders[i].order_id, 'pending', status)}/>    
       </div>
