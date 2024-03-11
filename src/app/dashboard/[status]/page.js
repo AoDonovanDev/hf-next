@@ -1,5 +1,5 @@
 import { pullOrders } from "@/lib/actions";
-import AdminDash from "@/ui/AdminDash";
+import AdminDash from "../../ui/AdminDash";
 
 export default async function Page() {
   
