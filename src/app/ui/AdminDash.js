@@ -1,25 +1,30 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { useParams } from "next/navigation";
 import { updateOrderStatus } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 import uuid4 from "uuid4";
 
 export default function AdminDash( { allOrders }) {
   
   const { status } = useParams();
+  const { replace } = useRouter();
 
   const orders = allOrders.filter(o => o.status === status);
 
   async function update(order_id, target, current){
-    await updateOrderStatus(order_id, target, current);
+    if(target === 'confirmed'){
+      replace(`/confirm/${order_id}`);
+    } else {
+      await updateOrderStatus(order_id, target, current);
+    }
   }
 
   const badgeMap = {
-    pending: 'badge-accent',
-    new: 'badge-primary',
-    rejected: 'badge-secondary'
+    confirmed: 'border-[#008080] text-[#008080]',
+    new: 'badge-neutral',
+    rejected: 'badge-error'
   }
 
   return (
@@ -111,7 +116,7 @@ export default function AdminDash( { allOrders }) {
           </div>
           <div className="flex flex-row justify-between mx-2 mb-32 mt-6 items-center">
             <Image src={"/rejectPink.svg"} height={70} width={70} alt="thumbDown" className="btn" id="rejected" onClick={()=>update(order.order_id, 'rejected', status)}/>
-            <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbUp" className="btn" id="pending" onClick={()=>update(order.order_id, 'pending', status)}/>
+            <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbUp" className="btn" id="confirmed" onClick={()=>update(order.order_id, 'confirmed', status)}/>
           </div>
         </div>
       </div>)}

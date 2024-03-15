@@ -25,8 +25,8 @@ export default function Layout({children}) {
         <button className={`bg-blue-200 text-blue-600 border-blue-600 ${status === 'new' ? 'active' : ''}`}>
           <Image src={"/new.svg"} height={50} width={50} id="new" alt="new" onClick={switchView}></Image>
         </button>
-        <button className={`bg-teal-200 text-teal-600 ${status === 'pending' ? 'active' : ''}`}>
-          <Image src={"/pending.svg"} height={40} width={40} id="pending" alt="pending" onClick={switchView}></Image>
+        <button className={`bg-teal-200 text-teal-600 ${status === 'confirmed' ? 'active' : ''}`}>
+          <Image src={"/pending.svg"} height={40} width={40} id="confirmed" alt="pending" onClick={switchView}></Image>
         </button>
     </div>
   </>

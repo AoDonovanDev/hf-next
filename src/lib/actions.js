@@ -71,6 +71,15 @@ export async function submit(formData){
   const cakeDay = await addCakeDay(date);
 }
 
+export async function confirmOrder (formData) {
+  unstable_noStore();
+
+  const update = await sql`UPDATE Orders SET status = 'confirmed' where Orders.id = ${formData.get('orderId')};`;
+  console.log('beep boop, sending confirmation email');
+  revalidatePath(`/dashboard`);
+  redirect('/dashboard/confirmed');
+}
+
 export async function getCakeDays(){
   unstable_noStore();
   try {
@@ -113,7 +122,7 @@ export async function pullOrders(status){
       INNER JOIN cakes c ON Orders.cake = c.id
       INNER JOIN customers cu ON Orders.customer = cu.id;
       `
-  return orders.rows;
+  return orders.rows
 } 
 
 export async function updateOrderStatus(order_id, target, current){
@@ -122,6 +131,16 @@ export async function updateOrderStatus(order_id, target, current){
   const update = await sql`UPDATE Orders SET status = ${target} where Orders.id = ${order_id};`;
   revalidatePath(`/dashboard/${current}`);
 }
+
+export async function getOrderInfo(order_id){
+  unstable_noStore();
+  const order = await sql`
+      SELECT Orders.id AS order_id, * FROM Orders 
+      INNER JOIN cakes c ON Orders.cake = c.id
+      INNER JOIN customers cu ON Orders.customer = cu.id
+      WHERE Orders.id = ${order_id};`
+  return order;
+  }
 
 export async function logout(){
   cookies().delete("hfa");
