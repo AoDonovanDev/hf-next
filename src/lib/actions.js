@@ -42,6 +42,7 @@ export async function submit(formData){
     const data = await resend.emails.send({
       from: 'HF <hank@houseflyvictuals.com>',
       to: [formData.contactInfo.email],
+      reply_to: [process.env.ADMIN_EMAIL],
       subject: 'Order Received',
       react: <OrderReceivedNotice firstName={formData.contactInfo.firstName} hfEmail={"houseflyvictuals@gmail.com"} estimatedTotal={`$${formData.total}.00`} />
     });
@@ -84,6 +85,7 @@ export async function confirmOrder (formData) {
     const confirmation = await resend.emails.send({
       from: 'HF <hank@houseflyvictuals.com>',
       to: [customerEmail],
+      reply_to: [process.env.ADMIN_EMAIL],
       subject: 'Order Confirmed',
       react: <OrderConfirmation emailBody={emailBody}/>
     });
