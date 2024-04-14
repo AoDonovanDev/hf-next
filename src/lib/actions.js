@@ -5,6 +5,7 @@ import { unstable_noStore } from "next/cache";
 import { sql } from '@vercel/postgres';
 import OrderReceivedNotice from "@/emails/OrderReceivedNotice";
 import OrderDetails from "@/emails/OrderDetail";
+import OrderConfirmation from "@/emails/OrderConfirmation";
 import { addCake, addCustomer, addOrder, addCakeDay } from "./queries";
 import { cookies } from 'next/headers';
 import { redirect } from "next/navigation";
@@ -73,9 +74,23 @@ export async function submit(formData){
 
 export async function confirmOrder (formData) {
   unstable_noStore();
-
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const emailBody = formData.get("emailBody");
+  const customerEmail = formData.get("customerEmail")
   const update = await sql`UPDATE Orders SET status = 'confirmed' where Orders.id = ${formData.get('orderId')};`;
+  
   console.log('beep boop, sending confirmation email');
+  try{
+    const confirmation = await resend.emails.send({
+      from: 'HF <hank@houseflyvictuals.com>',
+      to: [customerEmail],
+      subject: 'Order Confirmed',
+      react: <OrderConfirmation emailBody={emailBody}/>
+    });
+  } catch(error) {
+    console.log('failed to send email', error)
+  }
+
   revalidatePath(`/dashboard`);
   redirect('/dashboard/confirmed');
 }
