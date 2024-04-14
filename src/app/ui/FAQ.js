@@ -1,33 +1,45 @@
+import Link from "next/link"
+
 export default function FAQ(){
   return (
     <div style={{zIndex: 0}}>
+    <p>For any questions not answered here, drop me a line at <Link href={"mailto:houseflyvictuals@gmail.com"}>houseflyvictuals@gmail.com</Link></p>
     <div className="collapse collapse-plus bg-base-200">
       <input type="radio" name="my-accordion-3" defaultChecked /> 
       <div className="collapse-title text-xl font-medium">
-        Will you make me a drip cake?
+        How soon should I order my cake?
       </div>
       <div className="collapse-content"> 
-        <p>No. Fuck You.</p>
+        <p>Two weeks notice is required but I typically fill up at least a month in advance.</p>
       </div>
     </div>
     <div className="collapse collapse-plus bg-base-200">
       <input type="radio" name="my-accordion-3" /> 
       <div className="collapse-title text-xl font-medium">
-        Are the flowers edible?
+        Can I order a cake for next year?
       </div>
       <div className="collapse-content"> 
-        <p>I try not to put anything poisonous on the cakes but you should probably google any plants that you eat!</p>
+        <p>No, I book three months at a time.</p>
       </div>
     </div>
     <div className="collapse collapse-plus bg-base-200">
       <input type="radio" name="my-accordion-3" /> 
       <div className="collapse-title text-xl font-medium">
-        Will you deliver my cake to Grundy?
+        Do you have vegan and gluten free options?
       </div>
       <div className="collapse-content"> 
-        <p>Sorry no</p>
+        <p>Yes! Just use the allergies/preferences box to explain.  I&apos;ll send you a follow up email to talk about some options.</p>
       </div>
-  </div>
+    </div>
+    <div className="collapse collapse-plus bg-base-200">
+      <input type="radio" name="my-accordion-3" /> 
+      <div className="collapse-title text-xl font-medium">
+        Can you copy this picture exactly?
+      </div>
+      <div className="collapse-content"> 
+        <p>No, every cake is a unique creation.</p>
+      </div>
+    </div>
   </div>
   )
 }
