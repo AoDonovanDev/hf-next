@@ -20,7 +20,10 @@ export default function Preferences({dispatch, warnings, existingInfo}){
       <i>Partial Trust = HFV picks flavor <b>or</b> decoration</i><br/><br/>
       On the next page, you&apos;ll also have the option to attach a photo reference.</div> : <div><b>You&apos;ve chosen custom!</b> <br/><br/> What style of cake would you like? Describe what cake design you want below. After you pick your flavors, you&apos;ll also have the option to attach a photo reference.</div>}
       </div>
-      <textarea className="textarea textarea-secondary textarea-large w-5/6 h-1/2 md:h-5/6 ml-6 mb-6" placeholder="Allergies and preferences" name="preferences" defaultValue={existingInfo.preferences}></textarea>
+      <textarea className="textarea textarea-secondary textarea-large w-5/6 h-1/2 md:h-5/6 ml-6 mb-6 myInput" 
+                placeholder="Allergies and preferences" 
+                name="preferences" 
+                defaultValue={existingInfo.preferences}></textarea>
       <div className="flex justify-between">
         <button type="button" className="formBtn btn-warn" onClick={prev}>Previous</button>
         <button type="submit" className="formBtn btn-primary">Next</button>

@@ -139,12 +139,12 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <p className="text-red-400">{warnings.cakeFlavor}</p>
         <label htmlFor="cakeFlavor" className="font-semibold">What flavor cake?</label>
         <p className="text-sm font-thin">Some are combinable upon request</p>
-        <select className="select select-bordered w-full max-w-xs" 
+        <select className="select select-bordered w-full max-w-xs myInput" 
                 name="cakeFlavor" 
                 value={cakeFlavor} 
                 onChange={flavorPicker} >
           <option disabled value={'placeholder'}>Choose a cake flavor</option>
-          {flavors.map(f => <option key={uuid4()} value={f}>{f}</option>)}
+          {flavors.map(f => <option key={uuid4()} value={f} className="myInput">{f}</option>)}
         </select>
         {cakeFlavor === 'Other' && <input type="text" 
                          name="writeInCakeFlavor" 
@@ -158,7 +158,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="frostingType" 
-                 className="radio radio-secondary" 
+                 className="radio radio-secondary myInput" 
                  id={"smb"}
                  value={"Swiss Meringue Buttercream"} 
                  defaultChecked={existingInfo.cakeDetails?.frostingType === 'Swiss Meringue Buttercream'}/>
@@ -167,7 +167,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="frostingType" 
-                 className="radio radio-secondary" 
+                 className="radio radio-secondary myInput" 
                  id={"ab"} 
                  value={"American Buttercream"}
                  defaultChecked={existingInfo.cakeDetails?.frostingType === 'American Buttercream'}/>
@@ -176,7 +176,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="frostingType" 
-                 className="radio radio-secondary" 
+                 className="radio radio-secondary myInput" 
                  id={"cc"}
                  value={"Cream Cheese"}
                  defaultChecked={existingInfo.cakeDetails?.frostingType === 'Cream Cheese'}/>
@@ -186,7 +186,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
       <div>
         <p className="text-red-400">{warnings.frostingFlavor}</p>
         <label className="mb-2 font-semibold">What flavor frosting?</label>
-        <select className="select select-bordered w-full max-w-xs"
+        <select className="select select-bordered w-full max-w-xs myInput"
                 name="frostingFlavor" 
                 value={frostingFlavor}
                 onChange={frostingPicker}>
@@ -196,7 +196,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         {frostingFlavor === 'Other' && <input type="text" 
                          name="writeInFrostingFlavor" 
                          placeholder="Please type another option here" 
-                         className="input input-bordered input-sm input-info w-full max-w-xs"
+                         className="input input-bordered input-sm input-info w-full max-w-xs myInput"
                          defaultValue={existingInfo.cakeDetails?.writeInFrostingFlavor ? existingInfo.cakeDetails.writeInFrostingFlavor : ''}/>}
       </div>
       <div>
@@ -204,7 +204,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center"> 
           <input type="radio" 
                  name="fillingType"
-                 className="radio radio-secondary" 
+                 className="radio radio-secondary myInput" 
                  value="Ganache"
                  id="ganache" 
                  onChange={(e)=>handleOther(e)}
@@ -214,7 +214,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center">
           <input type="radio" 
                 name="fillingType" 
-                className="radio radio-secondary" 
+                className="radio radio-secondary myInput" 
                 value="Curd"
                 id="cured" 
                 onChange={(e)=>handleOther(e)}
@@ -224,7 +224,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="fillingType" 
-                 className="radio radio-secondary" 
+                 className="radio radio-secondary myInput" 
                  value="Jam"
                  id="jam" 
                  onChange={(e)=>handleOther(e)}
@@ -234,7 +234,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="fillingType" 
-                 className="radio radio-secondary" 
+                 className="radio radio-secondary myInput" 
                  value="Cream Cheese"
                  id="creamCheese" 
                  onChange={(e)=>handleOther(e)}
@@ -244,7 +244,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="fillingType" 
-                 className="radio radio-secondary" 
+                 className="radio radio-secondary myInput" 
                  value="Fresh Fruit"
                  id="freshFruit" 
                  onChange={(e)=>handleOther(e)}
@@ -254,7 +254,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="fillingType" 
-                 className="radio radio-secondary" 
+                 className="radio radio-secondary myInput" 
                  value="other"
                  id="otherRadio" 
                  onChange={(e)=>handleOther(e)} 
@@ -264,7 +264,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         {other && <input type="text" 
                          name="other" 
                          placeholder="Please type another option here" 
-                         className="input input-bordered input-sm input-info w-full max-w-xs"
+                         className="input input-bordered input-sm input-info w-full max-w-xs myInput"
                          defaultValue={existingInfo.cakeDetails?.fillingType === 'other' ? existingInfo.cakeDetails.other : ''}/>}
       </div>
       <div>
@@ -272,7 +272,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
         <p className="text-sm font-thin">Fruit, chocolate, matcha, etc</p>
         <input type="text" 
                placeholder="Type here" 
-               className="input input-bordered input-accent w-full max-w-xs" 
+               className="input input-bordered input-accent w-full max-w-xs myInput" 
                name="fillingFlavor"
                defaultValue={existingInfo.cakeDetails?.fillingFlavor ?? ''}/>
       </div>
@@ -280,7 +280,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           <label className="font-semibold">Extras:</label>
           <div className="display flex w-5/6">
             <input type="checkbox" 
-                   className="checkbox checkbox-secondary" 
+                   className="checkbox checkbox-secondary myInput" 
                    name="glitterCherries"
                    id="glCherries" 
                    defaultChecked={existingInfo.cakeDetails?.extras?.glitterCherries === true}
@@ -289,7 +289,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           </div>
           <div className="display flex w-5/6">
             <input type="checkbox" 
-                   className="checkbox checkbox-secondary" 
+                   className="checkbox checkbox-secondary myInput" 
                    name="discoBalls"
                    id="dBalls"
                    defaultChecked={existingInfo.cakeDetails?.extras?.discoBalls === true}
@@ -298,7 +298,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           </div>
           <div className="display flex w-5/6">
             <input type="checkbox" 
-                   className="checkbox checkbox-secondary" 
+                   className="checkbox checkbox-secondary myInput" 
                    name="bows"
                    id="xBows"
                    defaultChecked={existingInfo.cakeDetails?.extras?.bows === true}
@@ -307,7 +307,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           </div>
           <div className="display flex w-5/6">
             <input type="checkbox" 
-                   className="checkbox checkbox-secondary" 
+                   className="checkbox checkbox-secondary myInput" 
                    name="freshFruit"
                    id="frFruit"
                    defaultChecked={existingInfo.cakeDetails?.extras?.freshFruit === true}
