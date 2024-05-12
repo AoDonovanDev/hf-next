@@ -134,7 +134,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
   }
 
   return (
-    <form className="overflow-auto overscroll-contain lg:grid lg:grid-cols-2 ml-6 flex flex-col gap-6" action={next}>
+    <form className="overflow-auto overflow-x-visible overscroll-contain lg:grid lg:grid-cols-2 pl-6 py-6 flex flex-col gap-6" action={next}>
       <div>
         <p className="text-red-400">{warnings.cakeFlavor}</p>
         <label htmlFor="cakeFlavor" className="font-semibold">What flavor cake?</label>
@@ -316,8 +316,8 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           </div>
       </div>
       <div className="flex justify-between">
-        <button type="button" className="btn btn-warn" onClick={prev}>Previous</button>
-        <button type="submit" className="btn btn-primary">Next</button>
+        <button type="button" className="formBtn btn-warn relative right-[16px]" onClick={prev}>Previous</button>
+        <button type="submit" className="formBtn btn-primary mr-[16px]">Next</button>
       </div>
     </form>
   )

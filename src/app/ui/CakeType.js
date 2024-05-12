@@ -28,8 +28,8 @@ export default function CakeType({dispatch, warnings, existingInfo}){
   }
 
   return (
-    <div className="form-control flex justify-between w-full h-full overflow-auto overscroll-contain">
-      <label className="cursor-pointer label flex justify-center m-6">
+    <div className="form-control flex w-full h-full overflow-auto overscroll-contain py-6">
+      <label className="cursor-pointer label flex justify-center">
         <div className="flex flex-col">
           <label className="swap swap-flip text-2xl">
             {/* this hidden checkbox controls the state */}
@@ -40,7 +40,7 @@ export default function CakeType({dispatch, warnings, existingInfo}){
           <input type="checkbox" className="toggle toggle-secondary w-full" checked={type === 'trust'} onChange={()=>toggle()} />
         </div>
       </label>
-      <p className="m-6">{type==='trust' ? "Trust Cake: This is like a dealer's choice. The only information requirements are any allergies, dislikes, and size. If there is a specific cake Housefly has produced that you want your cake to be inspired by design wise, please attach a photo at the end of this form. All prompts, details or preferences you want to share are welcome! These typically lean toward the whimsical side of things."
+      <p className="mx-[16px] my-[24px]">{type==='trust' ? "Trust Cake: This is like a dealer's choice. The only information requirements are any allergies, dislikes, and size. If there is a specific cake Housefly has produced that you want your cake to be inspired by design wise, please attach a photo at the end of this form. All prompts, details or preferences you want to share are welcome! These typically lean toward the whimsical side of things."
       : "Custom cake: Totally up to you! Choose from options in the drop down menus and add any other details in the text box on the next page. Some flavors are combinable! "}</p>
       <div className="flex flex-col">
         <p className="text-red-400 ml-6">{warnings.cakeSize}</p>
@@ -53,14 +53,14 @@ export default function CakeType({dispatch, warnings, existingInfo}){
           <label>8” ~ 12-15 servings {type === 'trust' ? '$100' : '$120'}</label>
         </div>
       </div>
-      <div className="flex justify-between">
-        <form action={prev} className="flex self-start justify-start m-6">
-          <button className="btn btn-warn">Previous</button>
+      <div className="flex justify-between h-full items-end">
+        <form action={prev} className="flex mx-6">
+          <button className="formBtn btn-warn">Previous</button>
         </form>
-        <form action={next} className="flex self-end m-6">
+        <form action={next} className="flex mx-6">
           <input readOnly={true} value={type} name="trust" hidden={true}/>
           <input readOnly={true} value={size} name="cakeSize" hidden={true}/>
-          <button className="btn btn-primary">Next</button>
+          <button className="formBtn btn-primary">Next</button>
         </form>
       </div>
     </div>

@@ -126,12 +126,12 @@ export default function CakeForm(){
 
   return (
     <>
-      <div className={state.currentStep === 7 ? "hero min-h-screen min-w-screen" : "flex flex-col bg-base-200 w-full h-3/5 justify-center md:self-center border-8 bg-pink-100 items-center rounded-lg py-6 md:w-2/3 md:h-2/3 md:pl-6"}>
+      <div className={state.currentStep === 7 ? "hero h-full min-w-screen" : "flex flex-col bg-base-200 overflow-auto overscroll-contain w-full h-full justify-center md:self-center border-8 bg-pink-100 items-center rounded-lg md:w-2/3 md:h-2/3 md:pl-6 mb-[60px]"}>
         {state.steps[state.currentStep].component(dispatch, state.warnings, state.formData)}
       </div>
       {(state.currentStep > 3) && <div className="w-full flex justify-center">
-        <div className="stats shadow">
-            <div className="stat">
+        <div className="stats shadow h-full relative bottom-[30px]">
+            <div className="stat self-center">
               <div className="stat-title">Estimated Total</div>
               <div className="stat-value">${state.formData.total}.00</div>
             </div>

@@ -24,8 +24,8 @@ I take a 50% deposit within the week of order confirmation and the rest on pick 
     <input defaultValue={order.order_id} name="orderId" hidden />
     <input defaultValue={order.email} name="customerEmail" hidden/>
     <div className="flex justify-between mx-8 my-8">
-      <button type="button" className="btn btn-error" onClick={cancel}>Cancel</button>
-      <button className="btn btn-success">Send</button>
+      <button type="button" className="formBtn btn-error" onClick={cancel}>Cancel</button>
+      <button className="formBtn btn-success">Send</button>
     </div>
     </form>
   )

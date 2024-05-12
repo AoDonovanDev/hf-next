@@ -63,12 +63,13 @@ export default function Pickup({dispatch, existingInfo, warnings}){
   }
 
   return (
-    <div className="Pickup h-full flex flex-col justify-center">
-      <div className="flex justify-center mb-6">
+    <div className="Pickup h-full flex flex-col py-6">
+      <h1 className="text-xl font-bold self-center">Pickup Info</h1>
+      <div className="flex justify-center my-6">
         <p className="text-red-400">{warnings.pickupDate}</p>
         <p className="text-red-400">{warnings.pickupTime}</p>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 justify-self-start">
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
@@ -80,17 +81,17 @@ export default function Pickup({dispatch, existingInfo, warnings}){
           inline
         />
         <div className="flex flex-col justify-center items-center">
-          <label htmlFor="12pm" className={time === '12:00' ? "btn btn-success" : "btn"}>12:00pm</label>
-          <label htmlFor="1230pm" className={time === '12:30' ? "btn btn-success" : "btn"}>12:30pm</label>
-          <label htmlFor="1pm" className={time === '1:00' ? "btn btn-success" : "btn"}>1:00pm</label>
-          <label htmlFor="130pm" className={time === '1:30' ? "btn btn-success" : "btn"}>1:30pm</label>
-          <label htmlFor="2pm" className={time === '2:00' ? "btn btn-success" : "btn"}>2:00pm</label>
-          <label htmlFor="230pm" className={time === '2:30' ? "btn btn-success" : "btn"}>2:30pm</label>
+          <label htmlFor="12pm" className={time === '12:00' ? "formBtn btn-success" : "btn"}>12:00pm</label>
+          <label htmlFor="1230pm" className={time === '12:30' ? "formBtn btn-success" : "btn"}>12:30pm</label>
+          <label htmlFor="1pm" className={time === '1:00' ? "formBtn btn-success" : "btn"}>1:00pm</label>
+          <label htmlFor="130pm" className={time === '1:30' ? "formBtn btn-success" : "btn"}>1:30pm</label>
+          <label htmlFor="2pm" className={time === '2:00' ? "formBtn btn-success" : "btn"}>2:00pm</label>
+          <label htmlFor="230pm" className={time === '2:30' ? "formBtn btn-success" : "btn"}>2:30pm</label>
         </div>
       </div>
-      <div className="flex justify-between items-end mt-8">
+      <div className="flex justify-between justify-self-end items-end mt-8 h-full">
         <form action={prev}>
-          <button className="btn btn-warn">Previous</button>
+          <button className="formBtn btn-warn w-[90px]">Previous</button>
         </form>
         <form id="external-form" action={next}>
           <input type="radio" name="pickupTime" id="12pm" value={'12:00'} onChange={timeClick} checked={time==='12:00'} hidden={true}/>
@@ -100,7 +101,7 @@ export default function Pickup({dispatch, existingInfo, warnings}){
             <input type="radio" name="pickupTime" id="2pm" value={'2:00'} onChange={timeClick} checked={time==='2:00'} hidden={true}/>
              <input type="radio" name="pickupTime" id="230pm" value={'2:30'} onChange={timeClick} checked={time==='2:30'} hidden={true}/>
           <input hidden={true} defaultValue={startDate} name="date"/>
-          <button className="btn btn-primary">Next</button>
+          <button className="formBtn btn-primary justify-self-end w-[90px]">Next</button>
         </form>
       </div>
     </div>

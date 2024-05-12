@@ -17,9 +17,9 @@ export default function Policies({dispatch, warnings}){
 
 
   return (
-    <form className="overflow-auto overscroll-contain flex flex-col" action={submit}>
-      <Image src={'/policyCake.jpeg'} height={200} width={200} alt="policy cake" className="w-96 self-center mb-6 rounded"/>
-      <div className="bg-pink-200 mx-6 display flex flex-col p-4 rounded">
+    <form className="overflow-auto overscroll-contain flex flex-col pb-6" action={submit}>
+      <Image src={'/policyCake.jpeg'} height={200} width={200} alt="policy cake" className="w-full self-center mb-6 rounded"/>
+      <div className="bg-pink-200 m-[8px] display flex flex-col p-4 rounded">
         <h1 className="text-xl font-medium self-center">Policies</h1>
         <p>2 weeks notice required for all cakes. Any order placed with shorter notice may be subject to a rush fee.<br/><br/>
           All prices listed are the base price for your chosen size. A quote will be sent to you within 7 days of submitting the order request.<br/><br/>
@@ -36,8 +36,8 @@ export default function Policies({dispatch, warnings}){
           <input type="radio" name="agree" className="radio" value={'yes'} />
       </div>
       <div className="flex justify-between">
-        <button type="button" className="btn btn-warn" onClick={prev}>Previous</button>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="button" className="formBtn btn-warn" onClick={prev}>Previous</button>
+        <button type="submit" className="formBtn btn-primary">Submit</button>
       </div>
     </form>
   )
