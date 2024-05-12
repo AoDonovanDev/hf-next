@@ -45,12 +45,12 @@ export default function CakeType({dispatch, warnings, existingInfo}){
       <div className="flex flex-col">
         <p className="text-red-400 ml-6">{warnings.cakeSize}</p>
         <div className="flex">
-          <input type="radio" name="cakeSize" className="radio radio-secondary" checked={size === '6'} onChange={(e)=>radioHandler(e)} value={6}/>
-          <label>6” ~ 8-10 servings {type === 'trust' ? '$80' : '$100'}</label>
+          <input type="radio" name="cakeSize" className="radio radio-secondary" id="sixInch" checked={size === '6'} onChange={(e)=>radioHandler(e)} value={6}/>
+          <label htmlFor="sixInch">6” ~ 8-10 servings {type === 'trust' ? '$80' : '$100'}</label>
         </div>
         <div className="flex">
-          <input type="radio" name="cakeSize" className="radio radio-secondary" checked={size === '8'} onChange={(e)=>radioHandler(e)} value={8}/>
-          <label>8” ~ 12-15 servings {type === 'trust' ? '$100' : '$120'}</label>
+          <input type="radio" name="cakeSize" className="radio radio-secondary" id="eightInch" checked={size === '8'} onChange={(e)=>radioHandler(e)} value={8}/>
+          <label htmlFor="eightInch">8” ~ 12-15 servings {type === 'trust' ? '$100' : '$120'}</label>
         </div>
       </div>
       <div className="flex justify-between h-full items-end">

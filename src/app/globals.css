@@ -15,6 +15,7 @@ body{
     .formBtn {
         @apply btn;
         width: 90px;
+        margin-bottom: 12px;
     }
 }
 

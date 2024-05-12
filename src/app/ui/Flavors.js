@@ -1,7 +1,7 @@
 'use client';
 
 import uuid4 from "uuid4"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Flavors({dispatch, warnings, existingInfo}){
 
@@ -13,6 +13,10 @@ export default function Flavors({dispatch, warnings, existingInfo}){
   const [cakeFlavor, setCakeFlavor] = useState(existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.cakeFlavor : 'placeholder');
   const [frostingFlavor, setFrostingFlavor] = useState(existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.frostingFlavor : 'placeholder');
 
+  useEffect(() => {
+    const top = document.getElementById("top");
+    top.focus();
+  }, [])
 
   function flavorPicker(e){
     setCakeFlavor(e.target.value)
@@ -137,7 +141,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     <form className="overflow-auto overflow-x-visible overscroll-contain lg:grid lg:grid-cols-2 pl-6 py-6 flex flex-col gap-6" action={next}>
       <div>
         <p className="text-red-400">{warnings.cakeFlavor}</p>
-        <label htmlFor="cakeFlavor" className="font-semibold">What flavor cake?</label>
+        <label htmlFor="cakeFlavor" className="font-semibold" id="top">What flavor cake?</label>
         <p className="text-sm font-thin">Some are combinable upon request</p>
         <select className="select select-bordered w-full max-w-xs myInput" 
                 name="cakeFlavor" 
