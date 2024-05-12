@@ -21,18 +21,23 @@ export async function upload(b64Img){
     image: snip
   })
 
-  const response = await fetch('https://api.imgbb.com/1/upload', {
+  try {
+    const response = await fetch('https://api.imgbb.com/1/upload', {
     method: 'POST',
     cache: 'no-cache',
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
     body: params
-  })
-  const uploadResponseObj = await response.json()
-  const { data } = uploadResponseObj;
-  const { display_url } = data;
-  return display_url;
+    })
+    const uploadResponseObj = await response.json()
+    const { data } = uploadResponseObj;
+    const { display_url } = data;
+    return display_url;
+  } catch(err) {
+    console.log(err);
+    return("could not upload image");
+  }
 }
 
 export async function submit(formData){
