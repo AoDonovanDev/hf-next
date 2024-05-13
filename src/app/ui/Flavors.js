@@ -1,7 +1,7 @@
 'use client';
 
 import uuid4 from "uuid4"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Flavors({dispatch, warnings, existingInfo}){
 
@@ -12,10 +12,6 @@ export default function Flavors({dispatch, warnings, existingInfo}){
   const [other, setOther] = useState(existingInfo.cakeDetails?.fillingType === 'other' ? true : false);
   const [cakeFlavor, setCakeFlavor] = useState(existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.cakeFlavor : 'placeholder');
   const [frostingFlavor, setFrostingFlavor] = useState(existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.frostingFlavor : 'placeholder');
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
 
   function flavorPicker(e){
     setCakeFlavor(e.target.value)
