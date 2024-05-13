@@ -9,7 +9,7 @@ export default async function Navbar(){
   console.log(admin)
 
   return (
-    <div className="navbar bg-base-200" id="hfNavBar">
+    <div className="navbar bg-base-200">
       <div className="navbar-start">
         {admin ? <></> : <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

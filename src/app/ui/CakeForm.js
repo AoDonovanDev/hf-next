@@ -85,10 +85,6 @@ export default function CakeForm(){
           state.formData.total = state.formData.cakeSize === '6' ? 80 : 100;
           state.formData.total = state.formData.cakeType === 'custom' ? state.formData.total + 20 : state.formData.total;
         }
-        if(state.currentStep === 3){
-          const nav = document.getElementById("hfNavBar");
-          nav.scrollIntoView();
-        }
         if(state.currentStep === 3 && state.formData.cakeType === 'trust'){
           return {...state, currentStep: state.currentStep + 2}
         }
