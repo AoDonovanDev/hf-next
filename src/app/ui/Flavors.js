@@ -14,8 +14,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
   const [frostingFlavor, setFrostingFlavor] = useState(existingInfo.cakeDetails?.cakeFlavor ? existingInfo.cakeDetails.frostingFlavor : 'placeholder');
 
   useEffect(() => {
-    const top = document.getElementById("top");
-    top.focus();
+    window.scrollTo(0, 0);
   }, [])
 
   function flavorPicker(e){
