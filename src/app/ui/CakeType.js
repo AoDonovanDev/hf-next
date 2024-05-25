@@ -29,6 +29,7 @@ export default function CakeType({dispatch, warnings, existingInfo}){
 
   return (
     <div className="form-control flex w-full h-full overflow-auto overscroll-contain py-6">
+      <h1 className="text-xl font-bold self-center">Choose Trust or Custom</h1>
       <label className="cursor-pointer label flex justify-center">
         <div className="flex flex-col">
           <label className="swap swap-flip text-2xl">
@@ -40,7 +41,7 @@ export default function CakeType({dispatch, warnings, existingInfo}){
           <input type="checkbox" className="toggle toggle-secondary w-full" checked={type === 'trust'} onChange={()=>toggle()} />
         </div>
       </label>
-      <p className="mx-[16px] my-[24px]">{type==='trust' ? "Trust Cake: This is like a dealer's choice. The only information requirements are any allergies, dislikes, and size. If there is a specific cake Housefly has produced that you want your cake to be inspired by design wise, please attach a photo at the end of this form. All prompts, details or preferences you want to share are welcome! These typically lean toward the whimsical side of things."
+      <p className="mx-[16px] my-[24px]">{type==='trust' ? "Trust Cake: This is like a dealer's choice. The only information requirements are any allergies, dislikes, and size. These typically lean toward the whimsical side of things."
       : "Custom cake: Totally up to you! Choose from options in the drop down menus and add any other details in the text box on the next page. Some flavors are combinable! "}</p>
       <div className="flex flex-col">
         <p className="text-red-400 ml-6">{warnings.cakeSize}</p>

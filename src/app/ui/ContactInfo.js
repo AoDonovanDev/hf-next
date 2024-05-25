@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export default function ContactInfo({dispatch, warnings, existingInfo}){
 
 
@@ -6,6 +8,9 @@ export default function ContactInfo({dispatch, warnings, existingInfo}){
     const lastName = formData.get('lastName');
     const email = formData.get('email');
     const phoneNumber = formData.get('phoneNumber')
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const phoneRegex = /^(?:\+1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/;
+
 
     if(!firstName){
       dispatch({type: 'warn', payload: {firstName: 'First Name Required'}})
@@ -18,6 +23,12 @@ export default function ContactInfo({dispatch, warnings, existingInfo}){
     }
     else if(!phoneNumber){
       dispatch({type: 'warn', payload: {phoneNumber: "Phone Number Required"}})
+    }
+    else if(!phoneRegex.test(phoneNumber)){
+      dispatch({type: 'warn', payload: {phoneNumber: "Not a valid phone number"}})
+    }
+    else if(!emailRegex.test(email)){
+      dispatch({type: 'warn', payload: {email: "Not a valid email."}})
     }
     else {
       dispatch({type: 'next', payload: {
