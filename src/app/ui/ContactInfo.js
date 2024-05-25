@@ -21,14 +21,14 @@ export default function ContactInfo({dispatch, warnings, existingInfo}){
     else if(!email){
       dispatch({type: 'warn', payload: {email: 'Email Required'}})
     }
+    else if(!emailRegex.test(email)){
+      dispatch({type: 'warn', payload: {email: "Not a valid email."}})
+    }
     else if(!phoneNumber){
       dispatch({type: 'warn', payload: {phoneNumber: "Phone Number Required"}})
     }
     else if(!phoneRegex.test(phoneNumber)){
       dispatch({type: 'warn', payload: {phoneNumber: "Not a valid phone number"}})
-    }
-    else if(!emailRegex.test(email)){
-      dispatch({type: 'warn', payload: {email: "Not a valid email."}})
     }
     else {
       dispatch({type: 'next', payload: {
