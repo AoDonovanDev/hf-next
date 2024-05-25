@@ -61,14 +61,15 @@ export async function addOrder( { customerId, cakeId, date, pickupTime, total } 
   
 }
 
-export async function addCakeDay(date) {
+export async function addCakeDay( { date, pickupTime } ) {
   try{
-    const cake_day = await sql`SELECT * FROM Cake_days WHERE date = ${date};`;
-    if(cake_day.rows.length){
+    const cake_day = await sql`SELECT * FROM Cake_Days WHERE date = ${date};`;
+    if(cake_day.rows.length && cake_day.rows[0].available){
       await sql`UPDATE Cake_Days SET order_count = order_count + 1 WHERE date = ${date};`;
       await sql`UPDATE Cake_Days SET available = order_count < 2 WHERE date = ${date};`;
+      await sql`UPDATE Cake_Days SET pickup2 = ${pickupTime}`
     } else {
-      await sql`INSERT INTO Cake_Days (date, order_count, available) VALUES (${date}, DEFAULT, DEFAULT);`;
+      await sql`INSERT INTO Cake_Days (date, order_count, available, pickup1) VALUES (${date}, DEFAULT, DEFAULT, ${pickupTime});`;
     }
   } catch (e) {
     console.log(e)

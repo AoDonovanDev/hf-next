@@ -75,7 +75,7 @@ export async function submit(formData){
   const cake = await addCake({cakeSize, cakeType, preferences, imgUrl, ...formData.cakeDetails});
   const customer = await addCustomer(formData.contactInfo);
   const order = await addOrder({customerId: customer.rows[0].id, cakeId: cake.rows[0].id, date, pickupTime, total});
-  const cakeDay = await addCakeDay(date);
+  const cakeDay = await addCakeDay({date, pickupTime});
 }
 
 export async function confirmOrder (formData) {
