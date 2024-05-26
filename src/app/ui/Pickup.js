@@ -69,8 +69,7 @@ export default function Pickup({dispatch, existingInfo, warnings}){
     if(!cakeDays.length){
       return false;
     } else {
-      /* return cakeDays.find(c => c.date == startDate)?.pickup1 === btnTime */
-      return false;
+      return cakeDays.find(c => c.date == startDate)?.pickup1 === btnTime;
     }
   }
 
@@ -102,9 +101,9 @@ export default function Pickup({dispatch, existingInfo, warnings}){
           filterDate={isOffDay}
           excludeDates={unavailable}
           excludeDateIntervals={[
-            { start: new Date(), end: new Date('6-30-2024') },
+            { start: new Date(), end: new Date(2024, 5, 30) },
           ]}
-          minDate={new Date('7-01-2024')}
+          minDate={new Date(2024, 6, 1)}
           placeholderText="Select a day for pickup"
           form="external-form"
           inline
