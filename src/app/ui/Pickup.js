@@ -16,7 +16,8 @@ export default function Pickup({dispatch, existingInfo, warnings}){
   useEffect(() => {
     (async() => {
       const { cakeDays } = await getCakeDays();
-      setUnavilable(cakeDays.rows.filter(r => !r.available).map(r => new Date(r.date)));
+      const booked = cakeDays.rows.filter(r => !r.available).map(r => new Date(r.date));
+      setUnavilable(booked);
       setCakeDays(cakeDays.rows);
     })();
   }, [])
@@ -68,17 +69,17 @@ export default function Pickup({dispatch, existingInfo, warnings}){
     if(!cakeDays.length){
       return false;
     } else {
-      return cakeDays.find(c => c.date === startDate)?.pickup1 === startDate
+      return cakeDays.find(c => c.date == startDate)?.pickup1 === btnTime
     }
   }
 
   function buttonClasses(btnTime){
     if(isUnavilable(btnTime)){
-      return "btn-disabled";
+      return "formBtn btn-disabled line-through cursor-not-allowed";
     } else if(time === btnTime){
       return "formBtn btn-success";
     } else {
-      return "btn";
+      return "formBtn";
     }
   }
 
@@ -99,7 +100,10 @@ export default function Pickup({dispatch, existingInfo, warnings}){
           }
           filterDate={isOffDay}
           excludeDates={unavailable}
-          minDate={new Date()}
+          excludeDateIntervals={[
+            { start: new Date(), end: new Date('6-30-2024') },
+          ]}
+          minDate={new Date('7-01-2024')}
           placeholderText="Select a day for pickup"
           form="external-form"
           inline
