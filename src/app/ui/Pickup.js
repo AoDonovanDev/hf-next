@@ -69,7 +69,8 @@ export default function Pickup({dispatch, existingInfo, warnings}){
     if(!cakeDays.length){
       return false;
     } else {
-      return cakeDays.find(c => c.date == startDate)?.pickup1 === btnTime
+      /* return cakeDays.find(c => c.date == startDate)?.pickup1 === btnTime */
+      return false;
     }
   }
 
