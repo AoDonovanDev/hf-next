@@ -4,7 +4,6 @@ import { upload } from "@/lib/actions";
 export default function ReferencePhoto({dispatch, warnings, existingInfo}){
 
   async function next(formData){
-    console.log(formData.get('referencePhoto'));
     const fileInfo = formData.get('referencePhoto');
     if(!fileInfo.size){
       return dispatch({ type: 'next', payload: {imgUrl: ''} })

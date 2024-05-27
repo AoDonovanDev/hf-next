@@ -113,6 +113,7 @@ export async function getCakeDays(){
 }
 
 export async function login(formData){
+  unstable_noStore();
   const admin = await sql`SELECT password FROM Users WHERE id=1`;
   const authorized = await bcrypt.compare(formData.get('pwd'), admin.rows[0].password);
   if(authorized){

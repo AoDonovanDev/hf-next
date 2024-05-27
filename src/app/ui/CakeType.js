@@ -8,7 +8,6 @@ export default function CakeType({dispatch, warnings, existingInfo}){
   function toggle(){
     const cakeType = (type === 'custom') ? 'trust' : 'custom';
     setType(cakeType);
-    console.log(type)
   }
 
   function prev(){

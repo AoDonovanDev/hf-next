@@ -71,7 +71,6 @@ export default function CakeForm(){
   ]
 
   function reducer(state, action){
-    console.log(state, action)
     switch(action.type){
       case 'warn':
         return {...state, warnings: action.payload}
