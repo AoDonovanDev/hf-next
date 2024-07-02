@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker"
 import { useEffect, useState } from "react";
-import { getDay } from "date-fns";
+import { getDay, add } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { getCakeDays } from "../../lib/actions";
 
@@ -101,7 +101,9 @@ export default function Pickup({dispatch, existingInfo, warnings}){
           filterDate={isOffDay}
           excludeDates={unavailable}
           excludeDateIntervals={[
-            { start: new Date(), end: new Date(2024, 5, 30) },
+            { start: new Date(), end: add(new Date(), {
+              days: 5
+            })},
           ]}
           minDate={new Date(2024, 6, 1)}
           placeholderText="Select a day for pickup"
