@@ -170,3 +170,7 @@ export async function logout(){
   redirect("/");
 }
 
+export async function redirectToJotForm(){
+  redirect("https://form.jotform.com/233177226048052");
+}
+
