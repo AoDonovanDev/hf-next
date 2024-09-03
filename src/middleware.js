@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { redirectToJotForm } from './lib/actions';
 
 export async function middleware(req) {
-  //redirect all traffic to jotform for now
 
   const token = cookies().get("hfa");
   if(!token){
