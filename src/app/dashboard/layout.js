@@ -18,7 +18,7 @@ export default function Layout({children}) {
     <>
       <Image src={"/logout.svg"} height={80} width={80} alt="logout" className="btn absolute top-5 right-5" onClick={()=>logout()}/>
       {children}
-      <div className="btm-nav">
+      <div className="btm-nav" style={{zIndex: 6}}>
         <button className={`bg-pink-200 text-pink-600 ${status === 'rejected' ? 'active' : ''}`}>
           <Image src={"/rejected2.svg"} height={40} width={40} id="rejected" alt="rejected" onClick={switchView}></Image>
         </button>

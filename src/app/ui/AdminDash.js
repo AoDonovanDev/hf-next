@@ -29,7 +29,7 @@ export default function AdminDash( { allOrders }) {
 
   return (
      <div className="h-5/6 overflow-auto overscroll-contain" style={{WebkitOverflowScrolling: "touch"}}>
-      {orders.length && orders.map(order => <div key={uuid4()} className="collapse join-item border border-base-300">
+      {orders.length > 0 ? orders.map(order => <div key={uuid4()} className="collapse join-item border border-base-300">
         <input type="checkbox" name="my-accordion-3"/>
         <div className="collapse-title text-xl font-medium">
           <div className="stat-title font-bold">{order.first_name} {order.last_name}</div>
@@ -119,7 +119,7 @@ export default function AdminDash( { allOrders }) {
             <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbUp" className="btn" id="confirmed" onClick={()=>update(order.order_id, 'confirmed', status)}/>
           </div>
         </div>
-      </div>)}
+      </div>) : <h1>all caught up!</h1>}
       
      </div>
   )
