@@ -1,12 +1,11 @@
 import Image from "next/image";
-import { redirectToJotForm } from "@/lib/actions";
+/* import { redirectToJotForm } from "@/lib/actions"; */
 
 
 export default async function Page() {
 
-  //redirect to jotform for now :(
 
-  await redirectToJotForm();
+  /* await redirectToJotForm(); */
   
   return (
     <div>

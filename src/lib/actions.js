@@ -30,7 +30,8 @@ export async function upload(b64Img){
     },
     body: params
     })
-    const uploadResponseObj = await response.json()
+    const uploadResponseObj = await response.json();
+    console.log("*************are my uploads working at allll*************** : ", uploadResponseObj);
     const { data } = uploadResponseObj;
     const { display_url } = data;
     return display_url;
