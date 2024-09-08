@@ -113,20 +113,21 @@ export default function AdminDash( { allOrders }) {
             <div className="chat chat-start ml-6">
               <div className="chat-bubble">{order.preferences}</div>
             </div>
-           {order.reference_img && order.reference_img.slice(0, 4) == "http" && <Image src={order.reference_img} height={200} width={200} alt="reference"/>}
+            <div className="flex justify-center">
+              {order.reference_img && order.reference_img.slice(0, 4) == "http" && <Image src={order.reference_img} height={200} width={200} alt="reference"/>}
+            </div>
           </div>
           <div className="flex flex-row justify-between mx-2 mb-32 mt-6 items-center">
             {status == 'rejected' ? <Image src={"/trashPink.svg"} height={70} width={70} alt="trashCan" className="btn" id="trashCan" onClick={()=>deleteOrder(order.order_id, status)}/> 
             : <Image src={"/rejectPink.svg"} height={70} width={70} alt="thumbDown" className="btn" id="rejected" onClick={()=>update(order.order_id, 'rejected', status)}/>}
-            <div className={"badge badge-outline badge-neutral"} onClick={()=>document.getElementById('contactInfoModal').showModal()}>contact info</div>
+            <div className={"badge badge-outline badge-neutral"} onClick={()=>document.getElementById(`contactInfoModal-${order.order_id}`).showModal()}>contact info</div>
             {status == 'confirmed' ? <Image src={"/completeTeal3.svg"} height={70} width={70} alt="complete" className="btn" id="complete" onClick={()=>update(order.order_id, 'complete', status)}/> 
             : <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbUp" className="btn" id="confirmed" onClick={()=>update(order.order_id, 'confirmed', status)}/>}
           </div>
         </div>
-        <dialog id="contactInfoModal" className="modal">
+        <dialog id={`contactInfoModal-${order.order_id}`} className="modal">
         <div className="modal-box">
           <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
             </form>
             <h3 className="font-bold text-lg">{order.first_name}</h3>
@@ -134,7 +135,7 @@ export default function AdminDash( { allOrders }) {
             <a href={`mailto:${order.email}`}>Email: {order.email}</a>
           </div>
         </dialog>
-      </div>) : <h1>all caught up!</h1>}
+      </div>) : <h1 className="p-5">all caught up!</h1>}
       
 
       
