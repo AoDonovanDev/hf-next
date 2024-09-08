@@ -46,13 +46,21 @@ and they were completely overwhelmed. I made this web app specifically for their
 
 <h3>Customer Experience</h3>
 <div>
+    
 <video src="./public/hf-order-demo-edit2.mp4" width="800" height="400" controls></video><img src="./public/orderReceivedBody.png" width="200" height="400"/>
+
 </div>
 <h3>Admin Experience</h3>
 <div>
 <h4>New Order Email<h4>
-<video src="./public/newOrderBody.mp4" width="800" height="400" controls></video>
+    
+<video src="https://github.com/user-attachments/assets/f0302b6f-d5be-4842-8ef6-a2a2ce570df2" width="800" height="400" controls></video>
 <h4>Order Management Dashboard</h4>
+
+
+
+
+
 <video src="./public/adminDast1Redacted.mp4" width="800" height="400" controls></video><img src="./public/orderConfirmed.png" width="200" height="400"/>
 </div>
 
