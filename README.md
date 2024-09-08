@@ -37,7 +37,7 @@ and they were completely overwhelmed. I made this web app specifically for their
 </li>
 <li>Resend</li>
 <li>React Email</li>
-<li>Vercel postrgres</li>
+<li>Vercel Postgres</li>
 <li>Tailwind CSS</li>
 <li>DaisyUI</li>
 </ul>
