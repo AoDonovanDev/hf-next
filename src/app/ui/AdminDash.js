@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { updateOrderStatus } from "@/lib/actions";
+import { updateOrderStatus, deleteOrder } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import uuid4 from "uuid4";
 
@@ -29,7 +29,8 @@ export default function AdminDash( { allOrders }) {
 
   return (
      <div className="h-5/6 overflow-auto overscroll-contain" style={{WebkitOverflowScrolling: "touch"}}>
-      {orders.length > 0 ? orders.map(order => <div key={uuid4()} className="collapse join-item border border-base-300">
+      {orders.length > 0 ? orders.map(order => 
+      <div key={uuid4()} className="collapse join-item border border-base-300">
         <input type="checkbox" name="my-accordion-3"/>
         <div className="collapse-title text-xl font-medium">
           <div className="stat-title font-bold">{order.first_name} {order.last_name}</div>
@@ -39,7 +40,7 @@ export default function AdminDash( { allOrders }) {
           <div className="text-center m-0 flex-col divide-x-0">
             
             
-            
+          
           </div>
           <div className="overflow-x-auto">
             <div className="flex">
@@ -112,14 +113,30 @@ export default function AdminDash( { allOrders }) {
             <div className="chat chat-start ml-6">
               <div className="chat-bubble">{order.preferences}</div>
             </div>
-            {order.reference_img && <Image src={order.reference_img} height={200} width={200} alt="reference" />}
+           {order.reference_img && order.reference_img.slice(0, 4) == "http" && <Image src={order.reference_img} height={200} width={200} alt="reference"/>}
           </div>
           <div className="flex flex-row justify-between mx-2 mb-32 mt-6 items-center">
-            <Image src={"/rejectPink.svg"} height={70} width={70} alt="thumbDown" className="btn" id="rejected" onClick={()=>update(order.order_id, 'rejected', status)}/>
-            <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbUp" className="btn" id="confirmed" onClick={()=>update(order.order_id, 'confirmed', status)}/>
+            {status == 'rejected' ? <Image src={"/trashPink.svg"} height={70} width={70} alt="trashCan" className="btn" id="trashCan" onClick={()=>deleteOrder(order.order_id, status)}/> 
+            : <Image src={"/rejectPink.svg"} height={70} width={70} alt="thumbDown" className="btn" id="rejected" onClick={()=>update(order.order_id, 'rejected', status)}/>}
+            <div className={"badge badge-outline badge-neutral"} onClick={()=>document.getElementById('contactInfoModal').showModal()}>contact info</div>
+            {status == 'confirmed' ? <Image src={"/completeTeal3.svg"} height={70} width={70} alt="complete" className="btn" id="complete" onClick={()=>update(order.order_id, 'complete', status)}/> 
+            : <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbUp" className="btn" id="confirmed" onClick={()=>update(order.order_id, 'confirmed', status)}/>}
           </div>
         </div>
+        <dialog id="contactInfoModal" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 className="font-bold text-lg">{order.first_name}</h3>
+            <p className="py-4">Phone: {order.phone_number}</p>
+            <a href={`mailto:${order.email}`}>Email: {order.email}</a>
+          </div>
+        </dialog>
       </div>) : <h1>all caught up!</h1>}
+      
+
       
      </div>
   )

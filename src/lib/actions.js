@@ -31,7 +31,6 @@ export async function upload(b64Img){
     body: params
     })
     const uploadResponseObj = await response.json();
-    console.log("*************are my uploads working at allll*************** : ", uploadResponseObj);
     const { data } = uploadResponseObj;
     const { display_url } = data;
     return display_url;
@@ -174,4 +173,11 @@ export async function logout(){
 export async function redirectToJotForm(){
   redirect("https://form.jotform.com/233177226048052");
 }
+
+export async function deleteOrder(order_id, current){
+  unstable_noStore();
+  await sql`DELETE FROM Orders WHERE id = ${order_id};`;
+  revalidatePath(`/dashboard/${current}`);
+}
+
 
