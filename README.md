@@ -30,6 +30,7 @@ and they were completely overwhelmed. I made this web app specifically for their
 <ul>
 <li>Next.js
     <ul>
+    <li>React front-end</li>
     <li>custom auth strategy accomplished with server actions, middleware, and an auth api route</li>
     <li>database operations handled through server actions</li>
     <li>email templating in typescript</li>
