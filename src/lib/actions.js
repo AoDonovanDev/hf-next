@@ -14,8 +14,8 @@ import { revalidatePath } from "next/cache";
 import bcrypt from 'bcrypt';
 
 export async function upload(b64Img){
-  const cut = 'data:image/png;base64,'
-  const snip = b64Img.slice(cut.length)
+  const cut = b64Img.indexOf(",");
+  const snip = b64Img.slice(cut+1);
   const params = new URLSearchParams({
     key: process.env.IMGBB_API_KEY,
     image: snip
@@ -31,6 +31,7 @@ export async function upload(b64Img){
     body: params
     })
     const uploadResponseObj = await response.json();
+    console.log(uploadResponseObj);
     const { data } = uploadResponseObj;
     const { display_url } = data;
     return display_url;
