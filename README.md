@@ -30,6 +30,7 @@ and they were completely overwhelmed. I made this web app specifically for their
 <ul>
 <li>Next.js
     <ul>
+    <li>React front-end</li>
     <li>custom auth strategy accomplished with server actions, middleware, and an auth api route</li>
     <li>database operations handled through server actions</li>
     <li>email templating in typescript</li>
@@ -37,7 +38,7 @@ and they were completely overwhelmed. I made this web app specifically for their
 </li>
 <li>Resend</li>
 <li>React Email</li>
-<li>Vercel postrgres</li>
+<li>Vercel Postgres</li>
 <li>Tailwind CSS</li>
 <li>DaisyUI</li>
 </ul>
@@ -46,13 +47,18 @@ and they were completely overwhelmed. I made this web app specifically for their
 
 <h3>Customer Experience</h3>
 <div>
-<video src="./public/hf-order-demo-edit2.mp4" width="800" height="400" controls></video><img src="./public/orderReceivedBody.png" width="200" height="400"/>
+<video src="https://github.com/user-attachments/assets/96f707c8-7fdc-4ce2-9522-8399ed3ff2c8" width="800" height="400" controls></video><img src="./public/orderReceivedBody.png" width="200" height="400"/>
+
 </div>
 <h3>Admin Experience</h3>
 <div>
-<h4>New Order Email<h4>
-<video src="./public/newOrderBody.mp4" width="800" height="400" controls></video>
+<h4>New Order Email<h4>    
+<video src="https://github.com/user-attachments/assets/f0302b6f-d5be-4842-8ef6-a2a2ce570df2" width="800" height="400" controls></video>
 <h4>Order Management Dashboard</h4>
-<video src="./public/adminDast1Redacted.mp4" width="800" height="400" controls></video><img src="./public/orderConfirmed.png" width="200" height="400"/>
+<video src="https://github.com/user-attachments/assets/15710151-6bb5-4a81-a8de-1ea41950a4b4" width="800" height="400" controls></video><img src="./public/orderConfirmed.png" width="200" height="400"/>
 </div>
+
+
+
+
 
