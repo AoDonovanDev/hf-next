@@ -3,7 +3,6 @@
 import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { logout } from "../../lib/actions";
 
 export default function Layout({children}) {
 
@@ -16,7 +15,6 @@ export default function Layout({children}) {
 
   return (
     <>
-      <Image src={"/logout.svg"} height={80} width={80} alt="logout" className="btn absolute top-5 right-5" onClick={()=>logout()}/>
       {children}
       <div className="btm-nav" style={{zIndex: 6}}>
         <button className={`bg-pink-200 text-pink-600 ${status === 'rejected' ? 'active' : ''}`}>
@@ -28,7 +26,7 @@ export default function Layout({children}) {
         <button className={`bg-teal-200 text-teal-600 ${status === 'confirmed' ? 'active' : ''}`}>
           <Image src={"/pending.svg"} height={40} width={40} id="confirmed" alt="pending" onClick={switchView}></Image>
         </button>
-    </div>
+      </div>
   </>
   )
 }

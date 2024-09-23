@@ -122,7 +122,7 @@ export async function login(formData){
       user: "theOnlyUser",
       admin: true
     }, process.env.JWT_SECRET)
-    cookies().set("hfa", token);
+    cookies().set("hfa", token, {maxAge: 3600});
     redirect('/dashboard/new');
   } else {
     redirect('/');
@@ -168,7 +168,7 @@ export async function getOrderInfo(order_id){
 
 export async function logout(){
   cookies().delete("hfa");
-  redirect("/");
+  redirect('/');
 }
 
 export async function redirectToJotForm(){
