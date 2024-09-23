@@ -38,18 +38,18 @@ export default function ReferencePhoto({dispatch, warnings, existingInfo}){
   return(
     <form className="overflow-auto overscroll-contain h-full flex flex-col gap-[32px] pb-6" action={next}>
       <div className="flex flex-col">
-        <Image src="/croppedPhotoPickerCake.jpg" alt="cake reference photo" height={200} width={200} className="w-full"/>
+        <Image src="/croppedPhotoPickerCake.jpg" alt="cake reference photo" height={800} width={800} className="w-full self-center rounded md:h-[440px] md:w-[440px]"/>
         <div className="flex flex-col gap-[12px] pt-6">
           <h2 className="card-title">Add a reference photo</h2>
-          <p>Add a photo of a Housefly cake that you&apos;ve liked or other photo for color reference. No cake will be perfectly replicated. Cakes by other local bakers are not allowed as reference. If you like their work, you should support and order from them!</p>
+          <p >Add a photo of a Housefly cake that you&apos;ve liked or other photo for color reference. No cake will be perfectly replicated. Cakes by other local bakers are not allowed as reference. If you like their work, you should support and order from them!</p>
         </div>
       </div>
       <div className="card-actions justify-center">
         <input type="file" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="referencePhoto" accept="image/*" />
       </div>  
-      <div className="flex justify-between">
-        <button type="button" className="formBtn btn-warn" onClick={prev}>Previous</button>
-        <button type="submit" className="formBtn btn-primary">Next</button>
+      <div className="flex justify-between md:h-full">
+        <button type="button" className="formBtn btn-warn md:self-end" onClick={prev}>Previous</button>
+        <button type="submit" className="formBtn btn-primary mr-[16px] md:self-end">Next</button>
       </div>
     </form>
   )

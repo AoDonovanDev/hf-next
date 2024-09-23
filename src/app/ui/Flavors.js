@@ -133,8 +133,8 @@ export default function Flavors({dispatch, warnings, existingInfo}){
   }
 
   return (
-    <form className="overflow-auto overflow-x-visible overscroll-contain lg:grid lg:grid-cols-2 pl-6 py-6 flex flex-col gap-6" action={next}>
-      <div>
+    <form className="overflow-auto overflow-x-visible overscroll-contain lg:grid lg:grid-cols-2 pl-6 py-6 flex flex-col gap-6 w-full" action={next}>
+      <div className="flex flex-col">
         <p className="text-red-400">{warnings.cakeFlavor}</p>
         <label htmlFor="cakeFlavor" className="font-semibold" id="top">What flavor cake?</label>
         <p className="text-sm font-thin">Some are combinable upon request</p>
@@ -151,7 +151,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
                          className="input input-bordered input-sm input-info w-full max-w-xs"
                          defaultValue={existingInfo.cakeDetails?.writeInCakeFlavor ? existingInfo.cakeDetails.writeInCakeFlavor : ''}/>}
       </div>
-      <div>
+      <div className="flex flex-col">
         <p className="text-red-400">{warnings.frostingType}</p>
         <label className="mb-2 font-semibold">Frosting type:</label>
         <div className="mb-2 flex items-center">
@@ -182,7 +182,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
           <label htmlFor="cc" className="ml-6">Cream Cheese (not available for heavily piped cakes)</label>
         </div>
       </div>
-      <div>
+      <div className="flex flex-col">
         <p className="text-red-400">{warnings.frostingFlavor}</p>
         <label className="mb-2 font-semibold">What flavor frosting?</label>
         <select className="select select-bordered w-full max-w-xs myInput"
@@ -198,7 +198,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
                          className="input input-bordered input-sm input-info w-full max-w-xs myInput"
                          defaultValue={existingInfo.cakeDetails?.writeInFrostingFlavor ? existingInfo.cakeDetails.writeInFrostingFlavor : ''}/>}
       </div>
-      <div>
+      <div className="flex flex-col">
         <label className="font-semibold mb-6">Filling Type</label>
         <div className="mb-2 flex items-center"> 
           <input type="radio" 
@@ -266,7 +266,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
                          className="input input-bordered input-sm input-info w-full max-w-xs myInput"
                          defaultValue={existingInfo.cakeDetails?.fillingType === 'other' ? existingInfo.cakeDetails.other : ''}/>}
       </div>
-      <div>
+      <div className="flex flex-col">
         <label className="font-semibold">What flavor filling?</label>
         <p className="text-sm font-thin">Fruit, chocolate, matcha, etc</p>
         <input type="text" 
@@ -275,7 +275,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
                name="fillingFlavor"
                defaultValue={existingInfo.cakeDetails?.fillingFlavor ?? ''}/>
       </div>
-      <div>
+      <div className="flex flex-col">
           <label className="font-semibold">Extras:</label>
           <div className="display flex w-5/6">
             <input type="checkbox" 
@@ -314,7 +314,7 @@ export default function Flavors({dispatch, warnings, existingInfo}){
             <label className="ml-6" htmlFor="frFruit">Fresh fruit +Market Price</label>
           </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between col-span-2">
         <button type="button" className="formBtn btn-warn relative right-[16px]" onClick={prev}>Previous</button>
         <button type="submit" className="formBtn btn-primary mr-[16px]">Next</button>
       </div>

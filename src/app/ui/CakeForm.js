@@ -76,10 +76,8 @@ export default function CakeForm(){
         return {...state, warnings: action.payload}
       case 'next':
         state.steps[state.currentStep].state = 'valid';
-        console.log(action.payload)
         state.formData = {...state.formData, ...action.payload};
         state.warnings = '';
-        console.log(state.formData)
         if(state.currentStep === 2){
           state.formData.total = state.formData.cakeSize === '6' ? 80 : 100;
           state.formData.total = state.formData.cakeType === 'custom' ? state.formData.total + 20 : state.formData.total;

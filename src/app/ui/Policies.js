@@ -1,6 +1,11 @@
+'use client';
+
 import Image from "next/image"
+import { useState } from "react";
 
 export default function Policies({dispatch, warnings}){
+
+  const [viewWidth, setViewWidth] = useState(visualViewport.width);
 
   function submit(formData){
     const agree = formData.get('agree')
@@ -15,10 +20,17 @@ export default function Policies({dispatch, warnings}){
     dispatch({type: 'prev'})
   }
 
+  visualViewport.addEventListener('resize', () => {
+    setViewWidth(visualViewport.width);
+  })
+
+  const center = Math.floor(viewWidth/3);
+  console.log(viewWidth);
 
   return (
     <form className="overflow-auto overscroll-contain flex flex-col pb-6" action={submit}>
-      <Image src={'/policyCake.jpeg'} height={200} width={200} alt="policy cake" className="w-full self-center mb-6 rounded"/>
+      {viewWidth > 500 ? <Image src={"/hf2.png"} height={800} width={600} alt="fly guy" className={`z-8 absolute p-0 m-0 opacity-15`} style={{left: viewWidth > 1500 ? center : center-100}}/> :
+      <Image src={'/policyCake.jpeg'} height={800} width={800} alt="policy cake" className="w-full self-center mb-6 rounded md:h-[440px] md:w-[440px]"/>}
       <div className="bg-pink-200 m-[8px] display flex flex-col p-4 rounded">
         <h1 className="text-xl font-medium self-center">Policies</h1>
         <p>2 weeks notice required for all cakes. Any order placed with shorter notice may be subject to a rush fee.<br/><br/>
@@ -36,8 +48,8 @@ export default function Policies({dispatch, warnings}){
           <input type="radio" name="agree" className="radio" value={'yes'} />
       </div>
       <div className="flex justify-between">
-        <button type="button" className="formBtn btn-warn" onClick={prev}>Previous</button>
-        <button type="submit" className="formBtn btn-primary">Submit</button>
+        <button type="button" className="formBtn btn-warn z-0" onClick={prev}>Previous</button>
+        <button type="submit" className="formBtn btn-primary mr-[16px] z-0">Submit</button>
       </div>
     </form>
   )
