@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker"
 import { useEffect, useState } from "react";
-import { getDay, add } from "date-fns";
+import { getDay, add, getDayOfYear } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { getCakeDays } from "../../lib/actions";
 
@@ -17,14 +17,25 @@ export default function Pickup({dispatch, existingInfo, warnings}){
     (async() => {
       const { cakeDays } = await getCakeDays();
       const booked = cakeDays.rows.filter(r => !r.available).map(r => new Date(r.date));
+      const holidays = [
+        new Date(2024, 10, 20),
+        new Date(2024, 10 ,21),
+        new Date(2024, 10, 22),
+        new Date(2024, 11, 24),
+        new Date(2024, 11, 25),
+        new Date(2024, 11, 26)
+      ]
+      for(let date of holidays){
+        booked.push(date);
+      }
       setUnavilable(booked);
       setCakeDays(cakeDays.rows);
     })();
   }, [])
 
-  const isOffDay = (date) => {
+  const isAvailable = (date) => {
     const day = getDay(date);
-    return day === 5 || day === 6;
+    return day === 3 || day === 4 || day === 5 || day === 6;
   };
 
   function next(formData){
@@ -98,14 +109,15 @@ export default function Pickup({dispatch, existingInfo, warnings}){
             setStartDate(date);
             }
           }
-          filterDate={isOffDay}
+          filterDate={isAvailable}
           excludeDates={unavailable}
           excludeDateIntervals={[
             { start: new Date(), end: add(new Date(), {
               days: 5
             })},
           ]}
-          minDate={new Date(2024, 6, 1)}
+          minDate={new Date(2024, 10, 1)}
+          maxDate={new Date(2024, 11, 31)}
           placeholderText="Select a day for pickup"
           form="external-form"
           inline

@@ -39,13 +39,16 @@ export default function Policies({dispatch, warnings}){
           rescheduling or cancellation. Deposits are only available through Venmo. No Cashapp or PayPal. <br/><br/>
           All cakes, fillings and icings may contain, or come into contact with, soy, wheat, dairy, nuts or other allergens.<br/><br/>
           It is your responsibility to inform me prior to the confirmation of the booking of any allergy issues. It is your responsibility to inform your guests of all allergy information and because of
-          this Housefly Victuals will not be held liable for any allergic reaction resulting from consumption of the cake.
+          this Housefly Victuals will not be held liable for any allergic reaction resulting from consumption of the cake.<br/><br/>
           Final payment is available in exact change on pick up or Venmo. Payment must be made before the cake leaves the premises.<br/><br/>
           If the booking is cancelled due to illness or any other unforeseen circumstance that affects the ability to complete the order, the deposit will be refunded within 7 days after notification of cancellation.
           Pick up only. Delivery unavailable at this time.  <br/><br/>
-          I agree to all of the above</p>
+          </p>
+          <div className="flex">
           {warnings && <h1 className="text-red-400">{warnings.agree}</h1>}
-          <input type="radio" name="agree" className="radio" value={'yes'} />
+          <input type="radio" name="agree" className="radio radio-primary" value={'yes'} id="agree"/>
+          <label htmlFor="agree" className="italic ml-[12px] cursor-pointer">I agree to all of the above</label>
+          </div>
       </div>
       <div className="flex justify-between">
         <button type="button" className="formBtn btn-warn z-0" onClick={prev}>Previous</button>

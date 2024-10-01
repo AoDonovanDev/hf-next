@@ -1,4 +1,5 @@
 import { sql } from "@vercel/postgres";
+import { getDay } from "date-fns";
 
 export async function addCake( { 
   cakeSize,
@@ -69,7 +70,11 @@ export async function addCakeDay( { date, pickupTime } ) {
       await sql`UPDATE Cake_Days SET available = order_count < 2 WHERE date = ${date};`;
       await sql`UPDATE Cake_Days SET pickup2 = ${pickupTime}`
     } else {
-      await sql`INSERT INTO Cake_Days (date, order_count, available, pickup1) VALUES (${date}, DEFAULT, DEFAULT, ${pickupTime});`;
+      if(getDay(date) == 3 || getDay(date) == 4){
+        await sql`INSERT INTO Cake_Days (date, order_count, available, pickup1) VALUES (${date}, DEFAULT, false, ${pickupTime});`;
+      } else {
+        await sql`INSERT INTO Cake_Days (date, order_count, available, pickup1) VALUES (${date}, DEFAULT, DEFAULT, ${pickupTime});`;
+      }
     }
   } catch (e) {
     console.log(e)

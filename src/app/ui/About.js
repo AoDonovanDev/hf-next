@@ -1,7 +1,7 @@
 
 export default function About(){
   return (
-    <div className="hero h-full w-full md:h-full md:w-1/2 aspect-auto" style={{backgroundImage: 'url(/jf-rip.png)'}} >
+    <div className="hero h-full w-full md:h-full md:w-1/2 aspect-auto md:self-center" style={{backgroundImage: 'url(/jf-rip.png)'}} >
         <div className="hero-overlay bg-opacity-20 backdrop-blur-sm"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
