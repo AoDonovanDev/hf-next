@@ -41,7 +41,7 @@ export default function CakeType({dispatch, warnings, existingInfo}){
         </div>
       </label>
       {type === 'trust' ?
-      <p className="mx-[16px] my-[24px]">Trust Cake: This is like a dealer&apos;s choice. The only information requirements are any allergies, dislikes, and size. These typically lean toward the whimsical side of things and will be decorated in a HFV signature style. .</p> : 
+      <p className="mx-[16px] my-[24px]">Trust Cake: This is like a dealer&apos;s choice. The only information requirements are any allergies, dislikes, and size. These typically lean toward the whimsical side of things and will be decorated in a HFV signature style.</p> : 
       <><p className="mx-[16px] my-[24px]">Custom cake: Totally up to you! Choose from options in the drop down menus and add any other details in the text box on the next page. Some flavors are combinable! Specific designs or requests fall into this category. If you&apos;re wanting a themed cake or specific elements, it is a custom cake. Pick this option also if you would like to try a partial trust cake.</p><br/> 
       <p className="mx-[16px] mb-[24px]">Partial Trust: You pick the flavors, Housefly picks the design.</p></>
       }
