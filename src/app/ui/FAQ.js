@@ -29,7 +29,7 @@ export default function FAQ(){
         Can I order a cake for next year?
       </div>
       <div className="collapse-content"> 
-        <p>Currently I am only booking two months out at a time.</p>
+        <p>Currently, I&apos;m only booking 2-3 months at a time.</p>
       </div>
     </div>
     <div className="collapse collapse-plus bg-base-200 mb-[20px] shadow-md">
