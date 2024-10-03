@@ -37,7 +37,6 @@ export default function Policies({dispatch, warnings}){
           All prices listed are the base price for your chosen size. A quote will be sent to you within 7 days of submitting the order request.<br/><br/>
           A 50% deposit is required within 7 days of order confirmation. Spots are very limited. If the deposit is not received within this time period, your order is subject to
           rescheduling or cancellation. Deposits are only available through Venmo. No Cashapp or PayPal. <br/><br/>
-          All cakes, fillings and icings may contain, or come into contact with, soy, wheat, dairy, nuts or other allergens.<br/><br/>
           It is your responsibility to inform me prior to the confirmation of the booking of any allergy issues. It is your responsibility to inform your guests of all allergy information and because of
           this Housefly Victuals will not be held liable for any allergic reaction resulting from consumption of the cake.<br/><br/>
           Final payment is available in exact change on pick up or Venmo. Payment must be made before the cake leaves the premises.<br/><br/>

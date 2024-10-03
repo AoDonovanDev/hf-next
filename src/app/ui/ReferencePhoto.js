@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { upload } from "@/lib/actions";
+import { useFormStatus } from 'react-dom';
 
 export default function ReferencePhoto({dispatch, warnings, existingInfo}){
 
@@ -9,23 +10,21 @@ export default function ReferencePhoto({dispatch, warnings, existingInfo}){
       return dispatch({ type: 'next', payload: {imgUrl: ''} })
     }
     const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
+      return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
 
-        fileReader.onload = () => {
-            resolve(fileReader.result);
-        };
+          fileReader.onload = () => {
+              resolve(fileReader.result);
+          };
 
-        fileReader.onerror = (error) => {
-            reject(error);
-        };
-      });
+          fileReader.onerror = (error) => {
+              reject(error);
+          };
+        });
     };
     const base64 = await convertBase64(fileInfo);
     const imgUrl = await upload(base64)
-
-
     dispatch({type: 'next', payload:{imgUrl}});
   }
 
@@ -33,7 +32,10 @@ export default function ReferencePhoto({dispatch, warnings, existingInfo}){
     dispatch({type: 'prev'})
   }
 
-
+  function NextButton(){
+    const { pending } = useFormStatus();
+    return <button type="submit" className="formBtn btn-primary mr-[16px] md:self-end" disabled={pending}>{pending ? <span className="loading loading-spinner text-primary"></span> : 'Next'}</button>;
+  }
 
   return(
     <form className="overflow-auto overscroll-contain h-full flex flex-col gap-[32px] pb-6" action={next}>
@@ -49,7 +51,8 @@ export default function ReferencePhoto({dispatch, warnings, existingInfo}){
       </div>  
       <div className="flex justify-between md:h-full">
         <button type="button" className="formBtn btn-warn md:self-end" onClick={prev}>Previous</button>
-        <button type="submit" className="formBtn btn-primary mr-[16px] md:self-end">Next</button>
+        <NextButton/>
+        {/* <button type="submit" className="formBtn btn-primary mr-[16px] md:self-end">Next</button> */}
       </div>
     </form>
   )

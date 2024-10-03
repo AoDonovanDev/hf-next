@@ -86,7 +86,6 @@ export async function confirmOrder (formData) {
   const customerEmail = formData.get("customerEmail")
   const update = await sql`UPDATE Orders SET status = 'confirmed' where Orders.id = ${formData.get('orderId')};`;
   
-  console.log('beep boop, sending confirmation email');
   try{
     const confirmation = await resend.emails.send({
       from: 'HF <hank@houseflyvictuals.com>',

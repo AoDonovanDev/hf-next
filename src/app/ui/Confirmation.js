@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { confirmOrder } from "@/lib/actions";
+import { useFormState } from 'react-dom';
 
 export default function Confirmation ( { order } ) {
 
@@ -9,6 +10,11 @@ export default function Confirmation ( { order } ) {
   const { replace } = useRouter();
   function cancel(){
     replace('/dashboard/new')
+  }
+
+  function SendButton(){
+    const { pending } = useFormState();
+    return <button type="submit" className="formBtn btn-success" disabled={pending}>{pending ? <span className="loading loading-spinner text-primary"></span> : 'Send'}</button>;
   }
 
   return(
@@ -25,7 +31,7 @@ I take a 50% deposit within the week of order confirmation and the rest on pick 
     <input defaultValue={order.email} name="customerEmail" hidden/>
     <div className="flex justify-between mx-8 my-8">
       <button type="button" className="formBtn btn-error" onClick={cancel}>Cancel</button>
-      <button className="formBtn btn-success">Send</button>
+      <SendButton />
     </div>
     </form>
   )
