@@ -1,37 +1,14 @@
 import DatePicker from "react-datepicker"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getDay, add, getDayOfYear } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { getCakeDays } from "../../lib/actions";
 
 
-export default function Pickup({dispatch, existingInfo, warnings}){
+export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unavailable}){
 
   const [startDate, setStartDate] = useState(existingInfo.pickupDetails?.date ? new Date(existingInfo.pickupDetails.date) : '');
   const [time, setTime] = useState(existingInfo.pickupDetails?.pickupTime ? existingInfo.pickupDetails.pickupTime : null);
-  const [cakeDays, setCakeDays] = useState([]);
-  const [unavailable, setUnavilable] = useState([]);
-  
-
-  useEffect(() => {
-    (async() => {
-      const { cakeDays } = await getCakeDays();
-      const booked = cakeDays.rows.filter(r => !r.available).map(r => new Date(r.date));
-      const holidays = [
-        new Date(2024, 10, 20),
-        new Date(2024, 10 ,21),
-        new Date(2024, 10, 22),
-        new Date(2024, 11, 24),
-        new Date(2024, 11, 25),
-        new Date(2024, 11, 26)
-      ]
-      for(let date of holidays){
-        booked.push(date);
-      }
-      setUnavilable(booked);
-      setCakeDays(cakeDays.rows);
-    })();
-  }, [])
 
   const isAvailable = (date) => {
     const day = getDay(date);

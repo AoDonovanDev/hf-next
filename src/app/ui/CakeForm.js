@@ -1,6 +1,6 @@
 'use client';
 
-import { useReducer } from "react"
+import { useReducer, useState, useEffect } from "react"
 import ContactInfo from "./ContactInfo";
 import Pickup from "./Pickup";
 import CakeType from "./CakeType";
@@ -11,8 +11,9 @@ import Policies from "./Policies";
 import ThankYou from "./ThankYou";
 import { submit } from "@/lib/actions";
 
+export default function CakeForm({cakeDays, unavailable}){
 
-export default function CakeForm(){
+
   const steps = [
     {
       label: 'Contact Info',
@@ -24,7 +25,7 @@ export default function CakeForm(){
     {
       label: 'Pickup',
       component: function(fn, warnings, existingInfo){
-        return <Pickup dispatch={fn} warnings={warnings} existingInfo={existingInfo}/>
+        return <Pickup dispatch={fn} warnings={warnings} existingInfo={existingInfo} cakeDays={cakeDays} unavailable={unavailable}/>
       },
       state: 'invalid'
     },
