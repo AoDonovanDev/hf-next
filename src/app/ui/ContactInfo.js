@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export default function ContactInfo({dispatch, warnings, existingInfo}){
 
 
