@@ -1,8 +1,7 @@
 import DatePicker from "react-datepicker"
-import { useEffect, useState, useContext } from "react";
-import { getDay, add, getDayOfYear } from "date-fns";
+import { useState } from "react";
+import { getDay, add } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
-import { getCakeDays } from "../../lib/actions";
 
 
 export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unavailable}){
