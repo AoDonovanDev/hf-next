@@ -32,7 +32,6 @@ export default function CakeType({dispatch, warnings, existingInfo}){
       <label className="cursor-pointer label flex justify-center">
         <div className="flex flex-col">
           <label className="swap swap-flip text-2xl">
-            {/* this hidden checkbox controls the state */}
             <input type="checkbox" checked={type === 'trust'} readOnly={true}/>
             <div className="swap-on ml-4">Trust</div>
             <div className="swap-off">Custom</div>

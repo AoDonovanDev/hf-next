@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -119,10 +119,10 @@ export default function AdminDash( { allOrders }) {
           </div>
           <div className="flex flex-row justify-between mx-2 mb-32 mt-6 items-center">
             {status == 'rejected' ? <Image src={"/trashPink.svg"} height={70} width={70} alt="trashCan" className="btn" id="trashCan" onClick={()=>deleteOrder(order.order_id, status)}/> 
-            : <Image src={"/rejectPink.svg"} height={70} width={70} alt="thumbDown" className="btn" id="rejected" onClick={()=>update(order.order_id, 'rejected', status)}/>}
+            : <Image src={"/rejectPink.svg"} height={70} width={70} alt="thumbs down" className="btn" id="rejected" onClick={()=>update(order.order_id, 'rejected', status)}/>}
             <div className={"badge badge-outline badge-neutral"} onClick={()=>document.getElementById(`contactInfoModal-${order.order_id}`).showModal()}>contact info</div>
             {status == 'confirmed' ? <Image src={"/completeTeal3.svg"} height={70} width={70} alt="complete" className="btn" id="complete" onClick={()=>update(order.order_id, 'complete', status)}/> 
-            : <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbUp" className="btn" id="confirmed" onClick={()=>update(order.order_id, 'confirmed', status)}/>}
+            : <Image src={"/confirmTeal.svg"} height={70} width={70} alt="thumbs up" className="btn" id="confirmed" onClick={()=>update(order.order_id, 'confirmed', status)}/>}
           </div>
         </div>
         <dialog id={`contactInfoModal-${order.order_id}`} className="modal">
