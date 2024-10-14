@@ -1,5 +1,5 @@
 import { Courier_Prime } from 'next/font/google';
-import { Analytics } from '@vercel/analytics';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import Navbar from './ui/Navbar';
 
