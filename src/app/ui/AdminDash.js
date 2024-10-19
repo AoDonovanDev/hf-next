@@ -28,7 +28,7 @@ export default function AdminDash( { allOrders }) {
   }
 
   return (
-     <div className="h-5/6 overflow-auto overscroll-contain mb-[64px]" style={{WebkitOverflowScrolling: "touch"}}>
+     <div className="h-5/6 overflow-y-scroll overscroll-contain mb-[64px]" style={{WebkitOverflowScrolling: "touch"}}>
       {orders.length > 0 ? orders.map(order => 
       <div key={uuid4()} className="collapse join-item border border-base-300">
         <input type="checkbox" name="my-accordion-3"/>
@@ -38,9 +38,6 @@ export default function AdminDash( { allOrders }) {
         </div>
         <div className="collapse-content">
           <div className="text-center m-0 flex-col divide-x-0">
-            
-            
-          
           </div>
           <div className="overflow-x-auto">
             <div className="flex">
@@ -136,9 +133,6 @@ export default function AdminDash( { allOrders }) {
           </div>
         </dialog>
       </div>) : <h1 className="p-5">all caught up!</h1>}
-      
-
-      
      </div>
   )
 }
