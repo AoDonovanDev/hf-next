@@ -114,7 +114,7 @@ export default function AdminDash( { allOrders }) {
               {order.reference_img && order.reference_img.slice(0, 4) == "http" && <Image src={order.reference_img} height={200} width={200} alt="reference"/>}
             </div>
           </div>
-          <div className="flex flex-row justify-between mx-2 mb-32 mt-6 items-center">
+          <div className="flex flex-row justify-between mx-2 mb-[32px] mt-[28px] items-center">
             {status == 'rejected' ? <Image src={"/trashPink.svg"} height={70} width={70} alt="trashCan" className="btn" id="trashCan" onClick={()=>deleteOrder(order.order_id, status)}/> 
             : <Image src={"/rejectPink.svg"} height={70} width={70} alt="thumbs down" className="btn" id="rejected" onClick={()=>update(order.order_id, 'rejected', status)}/>}
             <div className={"badge badge-outline badge-neutral"} onClick={()=>document.getElementById(`contactInfoModal-${order.order_id}`).showModal()}>contact info</div>
