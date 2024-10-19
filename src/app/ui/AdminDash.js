@@ -28,7 +28,7 @@ export default function AdminDash( { allOrders }) {
   }
 
   return (
-     <div className="h-5/6 overflow-y-scroll overscroll-none mb-[64px]" style={{WebkitOverflowScrolling: "touch"}}>
+     <div className="h-5/6 overflow-scroll mb-[64px]" style={{WebkitOverflowScrolling: "touch"}}>
       {orders.length > 0 ? orders.map(order => 
       <div key={uuid4()} className="collapse join-item border border-base-300">
         <input type="checkbox" name="my-accordion-3"/>
