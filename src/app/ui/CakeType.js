@@ -3,7 +3,7 @@ import { useState } from "react"
 export default function CakeType({dispatch, warnings, existingInfo}){
 
   const [type, setType] = useState(existingInfo.cakeType ?? 'trust');
-  const [size, setSize] = useState(existingInfo.cakeSize ?? '');
+  const [size, setSize] = useState(existingInfo.cakeSize ?? '6');
 
   function toggle(){
     const cakeType = (type === 'custom') ? 'trust' : 'custom';
