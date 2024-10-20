@@ -28,8 +28,8 @@ export async function addCake( {
       ${writeInCakeFlavor}, ${writeInFrostingFlavor}, ${bows}, ${discoBalls}, ${freshFruit}, ${glitterCherries}, ${preferences}, ${imgUrl}) RETURNING id;
     `
     return cake;
-    } catch(e) {
-      console.log(e)
+    } catch(err) {
+      console.log(err)
     }
     
 }
@@ -42,8 +42,8 @@ export async function addCustomer( { firstName, lastName, phoneNumber, email } )
     VALUES (${firstName}, ${lastName}, ${phoneNumber}, ${email}) RETURNING id;
   `
     return customer;
-  } catch(e) {
-    console.log(e)
+  } catch(err) {
+    console.log(err)
   }
   
 }
@@ -56,8 +56,8 @@ export async function addOrder( { customerId, cakeId, date, pickupTime, total } 
     VALUES (${customerId}, ${cakeId}, ${date}, ${pickupTime}, ${total})
   `
   return order;
-  } catch(e) {
-    console.log(e)
+  } catch(err) {
+    console.log(err)
   }
   
 }
@@ -76,7 +76,20 @@ export async function addCakeDay( { date, pickupTime } ) {
         await sql`INSERT INTO Cake_Days (date, order_count, available, pickup1) VALUES (${date}, DEFAULT, DEFAULT, ${pickupTime});`;
       }
     }
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export async function getConfirmedOrdersWithCustomerInfo() {
+  try {
+    const confirmedOrdersWithCustomerInfo = await sql`
+    SELECT * FROM customers
+    JOIN (SELECT * FROM orders WHERE status = 'confirmed') as confirmed_orders
+    ON customers.id = confirmed_orders.customer;
+    `
+    return confirmedOrdersWithCustomerInfo.rows;
+  } catch(err) {
+    console.log('Something went wrong when fetching confirmed orders:', err);
   }
 }
