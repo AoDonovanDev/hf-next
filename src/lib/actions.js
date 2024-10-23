@@ -90,6 +90,7 @@ export async function confirmOrder (formData) {
     const confirmation = await resend.emails.send({
       from: 'HF <hank@houseflyvictuals.com>',
       to: [customerEmail],
+      cc: process.env.ADMIN_EMAIL,
       reply_to: [process.env.ADMIN_EMAIL],
       subject: 'Order Confirmed',
       react: <OrderConfirmation emailBody={emailBody}/>
