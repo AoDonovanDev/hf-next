@@ -159,7 +159,7 @@ export const OrderDetails = ({
                 <Row><Text className="m-0 p-2">Pickup Time</Text></Row>
               </Column>
               <Column className='border border-solid border-[#eaeaea] border-l-0'>
-                <Row><Text className="m-0 p-2">{pickupDetails.date.slice(0,9)}</Text></Row>
+                <Row><Text className="m-0 p-2">{pickupDetails.date.slice(0,10)}</Text></Row>
                 <Hr/>
                 <Row><Text className="m-0 p-2">{pickupDetails.pickupTime}</Text></Row>
               </Column>
