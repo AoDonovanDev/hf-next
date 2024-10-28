@@ -31,7 +31,7 @@ export const OrderConfirmation = ({
       <Tailwind>
         <Body className="bg-white my-auto mx-auto font-sans w-full">
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
-            <Text className="text-[#666666] text-[24px] leading-[24px] tracking-wide whitespace-pre">
+            <Text className="text-[#666666] text-[12px] leading-[24px] tracking-wide whitespace-pre">
               {emailBody}
 
 
