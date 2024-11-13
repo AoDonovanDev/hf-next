@@ -31,7 +31,6 @@ export async function upload(b64Img){
     body: params
     })
     const uploadResponseObj = await response.json();
-    console.log(uploadResponseObj);
     const { data } = uploadResponseObj;
     const { display_url } = data;
     return display_url;
@@ -51,8 +50,11 @@ export async function submit(formData){
       reply_to: [process.env.ADMIN_EMAIL],
       subject: 'Order Received',
       react: <OrderReceivedNotice firstName={formData.contactInfo.firstName} hfEmail={"houseflyvictuals@gmail.com"} estimatedTotal={`$${formData.total}.00`} />
-    });
-    console.log(data)
+    })
+  } catch(err) {
+    console.log("***Failed to send Order Received", err);
+  }
+  try {
     const adminEmail = await resend.emails.send({
       from: 'HF <hank@houseflyvictuals.com>',
       to: process.env.ADMIN_EMAIL,
@@ -66,17 +68,37 @@ export async function submit(formData){
                            preferences={formData.preferences}
                            imgUrl={formData.imgUrl}/>
     })
-  } catch (error) {
-    console.log(error)
-    return error ;
+  } catch(err) {
+    console.log("***Failed to send New Order", err);
   }
-
+    
   const {total, cakeSize, cakeType, preferences, imgUrl} = formData;
   const {date, pickupTime} = formData.pickupDetails;
-  const cake = await addCake({cakeSize, cakeType, preferences, imgUrl, ...formData.cakeDetails});
-  const customer = await addCustomer(formData.contactInfo);
-  const order = await addOrder({customerId: customer.rows[0].id, cakeId: cake.rows[0].id, date, pickupTime, total});
-  const cakeDay = await addCakeDay({date, pickupTime});
+  
+  try {
+    await addCake({cakeSize, cakeType, preferences, imgUrl, ...formData.cakeDetails});
+  } catch(err) {
+    console.log("***Could not add cake", err);
+  };
+  
+  try {
+    await addCustomer(formData.contactInfo);
+  } catch(err) {
+    console.log("***Could not add customer", err);
+  }
+
+  try {
+    await addOrder({customerId: customer.rows[0].id, cakeId: cake.rows[0].id, date, pickupTime, total});
+  } catch(err) {
+    console.log("***Could Not add order", err);
+  }
+ 
+  try {
+    await addCakeDay({date, pickupTime});
+  } catch(err) {
+    console.log("***Could not add cake day");
+  }
+
 }
 
 export async function confirmOrder (formData) {
