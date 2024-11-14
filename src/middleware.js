@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 export async function middleware(req) {
-
+  
   const token = cookies().get("hfa");
   if(!token){
     return NextResponse.redirect(`${process.env.BASE_URL}/`);

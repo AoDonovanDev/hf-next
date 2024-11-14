@@ -10,6 +10,8 @@ export const metadata = {
   description: '*~-*-~*',
 }
 
+console.log("***Testing alerts all over the dang place");
+
 export default function RootLayout({ children }) {
 
   return (
