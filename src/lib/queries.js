@@ -29,7 +29,9 @@ export async function addCake( {
     `
     return cake;
     } catch(err) {
-      console.log(err)
+      const dump = `cakeSize: ${cakeSize}, cakeType: ${cakeType}, cakeFlavor: ${cakeFlavor}, frostingFlavor: ${frostingFlavor}, frostingType: ${frostingType}, fillingType: ${fillingType}, other: ${other}, fillingFlavor: ${fillingFlavor}, 
+      writeInCakeFlavor: ${writeInCakeFlavor}, writeInFrostingFlavor: ${writeInFrostingFlavor}, bows: ${bows}, discoBalls: ${discoBalls}, freshFruit: ${freshFruit}, glitterCherries: ${glitterCherries}, preferences: ${preferences}, imgUrl: ${imgUrl}`;
+      console.log("***Error adding cake to database:", err, dump);
     }
     
 }
@@ -43,7 +45,8 @@ export async function addCustomer( { firstName, lastName, phoneNumber, email } )
   `
     return customer;
   } catch(err) {
-    console.log(err)
+    const dump = `firstName: ${firstName}, lastName: ${lastName}, phoneNumber: ${phoneNumber}, email: ${email}`;
+    console.log("***Error adding customer to database:", err, dump);
   }
   
 }
@@ -57,7 +60,8 @@ export async function addOrder( { customerId, cakeId, date, pickupTime, total } 
   `
   return order;
   } catch(err) {
-    console.log(err)
+    const dump = `customerId: ${customerId}, cakeId: ${cakeId}, date: ${date}, pickupTime: ${pickupTime}, total: ${total}`;
+    console.log("***Error adding order to database", err, dump);
   }
   
 }
@@ -77,7 +81,8 @@ export async function addCakeDay( { date, pickupTime } ) {
       }
     }
   } catch (err) {
-    console.log(err)
+    const dump = `date: ${date}, pickupTime: ${pickupTime}`;
+    console.log("***Error adding cake day to database:", err, dump);
   }
 }
 
