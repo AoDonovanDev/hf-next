@@ -74,27 +74,30 @@ export async function submit(formData){
     
   const {total, cakeSize, cakeType, preferences, imgUrl} = formData;
   const {date, pickupTime} = formData.pickupDetails;
+  let cake, customer, order, cakeDay;
   
+
+
   try {
-    await addCake({cakeSize, cakeType, preferences, imgUrl, ...formData.cakeDetails});
+    cake = await addCake({cakeSize, cakeType, preferences, imgUrl, ...formData.cakeDetails});
   } catch(err) {
     console.log("***Could not add cake", err);
   };
   
   try {
-    await addCustomer(formData.contactInfo);
+    customer = await addCustomer(formData.contactInfo);
   } catch(err) {
     console.log("***Could not add customer", err);
   }
 
   try {
-    await addOrder({customerId: customer.rows[0].id, cakeId: cake.rows[0].id, date, pickupTime, total});
+    order = await addOrder({customerId: customer.rows[0].id, cakeId: cake.rows[0].id, date, pickupTime, total});
   } catch(err) {
     console.log("***Could Not add order", err);
   }
  
   try {
-    await addCakeDay({date, pickupTime});
+    cakeDay = await addCakeDay({date, pickupTime});
   } catch(err) {
     console.log("***Could not add cake day");
   }
