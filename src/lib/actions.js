@@ -175,7 +175,7 @@ export async function updateOrderStatus(order_id, target, current){
   unstable_noStore();
 
   const update = await sql`UPDATE Orders SET status = ${target} where Orders.id = ${order_id};`;
-  revalidatePath(`/dashboard/${current}`);
+  revalidatePath('/dashboard', 'layout');
 }
 
 export async function getOrderInfo(order_id){

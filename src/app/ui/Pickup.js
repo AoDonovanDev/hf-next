@@ -92,7 +92,7 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
               days: 5
             })},
           ]}
-          minDate={new Date(2024, 10, 1)}
+          minDate={new Date()}
           maxDate={new Date(2024, 11, 31)}
           placeholderText="Select a day for pickup"
           form="external-form"

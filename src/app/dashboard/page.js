@@ -5,6 +5,7 @@ export default async function Page(){
 
   const confirmedOrdersWithCustomerInfo = await getConfirmedOrdersWithCustomerInfo();
   const sorted = confirmedOrdersWithCustomerInfo.sort( (a,b) => new Date(a.pickup_date) - new Date(b.pickup_date) );
+  console.log(sorted);
   
   return (
 

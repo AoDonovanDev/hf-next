@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { getDay } from "date-fns";
+import { unstable_noStore } from "next/cache";
 
 export async function addCake( { 
   cakeSize,
@@ -87,6 +88,7 @@ export async function addCakeDay( { date, pickupTime } ) {
 }
 
 export async function getConfirmedOrdersWithCustomerInfo() {
+  unstable_noStore();
   try {
     const confirmedOrdersWithCustomerInfo = await sql`
     SELECT * FROM customers
