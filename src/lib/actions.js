@@ -52,7 +52,7 @@ export async function submit(formData){
       react: <OrderReceivedNotice firstName={formData.contactInfo.firstName} hfEmail={"houseflyvictuals@gmail.com"} estimatedTotal={`$${formData.total}.00`} />
     })
   } catch(err) {
-    console.log("***Failed to send Order Received", err);
+    console.log("***Failed to send Order Received email", err);
   }
   try {
     const adminEmail = await resend.emails.send({
@@ -69,7 +69,7 @@ export async function submit(formData){
                            imgUrl={formData.imgUrl}/>
     })
   } catch(err) {
-    console.log("***Failed to send New Order", err);
+    console.log("***Failed to send New Order email", err);
   }
     
   const {total, cakeSize, cakeType, preferences, imgUrl} = formData;
@@ -81,24 +81,28 @@ export async function submit(formData){
   try {
     cake = await addCake({cakeSize, cakeType, preferences, imgUrl, ...formData.cakeDetails});
   } catch(err) {
-    console.log("***Could not add cake", err);
+    const dump = `cakeSize: ${cakeSize}, cakeType: ${cakeType}, preferences: ${preferences}, imgUrl: ${imgUrl}, formData: ${formData.cakeDetails}`;
+    console.log("***Could not add cake", err, dump);
   };
   
   try {
     customer = await addCustomer(formData.contactInfo);
   } catch(err) {
-    console.log("***Could not add customer", err);
+    const dump = formData.contactInfo;
+    console.log("***Could not add customer", err, dump);
   }
 
   try {
     order = await addOrder({customerId: customer.rows[0].id, cakeId: cake.rows[0].id, date, pickupTime, total});
   } catch(err) {
-    console.log("***Could Not add order", err);
+    const dump = `customerId: ${customer.rows[0].id}, cakeId: ${cake.rows[0].id}, date: ${date}, pickupTime: ${pickupTime}, total: ${total}`;
+    console.log("***Could Not add order", err, dump);
   }
  
   try {
     cakeDay = await addCakeDay({date, pickupTime});
   } catch(err) {
+    const dump = `date: ${date}, pickupTime: ${pickupTime}`;
     console.log("***Could not add cake day");
   }
 
@@ -120,8 +124,8 @@ export async function confirmOrder (formData) {
       subject: 'Order Confirmed',
       react: <OrderConfirmation emailBody={emailBody}/>
     });
-  } catch(error) {
-    console.log('failed to send email', error)
+  } catch(err) {
+    console.log('***Could not send Order Confirmed email', err)
   }
 
   revalidatePath(`/dashboard`);
