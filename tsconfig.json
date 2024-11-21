@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/page.js", "src/app/admin/auth/route.js"  ],
+, "src/app/page.js", "src/app/admin/auth/route.js", "src/app/admin/spauth/route.js"  ],
   "exclude": [
     "node_modules"
   ]

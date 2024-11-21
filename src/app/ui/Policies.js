@@ -8,7 +8,7 @@ export default function Policies({dispatch, warnings}){
   const [viewWidth, setViewWidth] = useState(visualViewport.width);
 
   function submit(formData){
-    const agree = formData.get('agree')
+    const agree = formData.get('agree');
     if(agree !== 'yes'){
       dispatch({type: 'warn', payload:{agree: 'You have to agree.'}})
     } else {
@@ -25,7 +25,6 @@ export default function Policies({dispatch, warnings}){
   })
 
   const center = Math.floor(viewWidth/3);
-  console.log(viewWidth);
 
   return (
     <form className="overflow-auto overscroll-contain flex flex-col pb-6" action={submit}>
