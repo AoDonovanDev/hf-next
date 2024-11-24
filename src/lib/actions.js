@@ -6,6 +6,7 @@ import { sql } from '@vercel/postgres';
 import OrderReceivedNotice from "@/emails/OrderReceivedNotice";
 import OrderDetails from "@/emails/OrderDetail";
 import OrderConfirmation from "@/emails/OrderConfirmation";
+import KoalaWelcomeEmail from "@/emails/WelcomeTest";
 import { addCake, addCustomer, addOrder, addCakeDay } from "./queries";
 import { cookies } from 'next/headers';
 import { redirect } from "next/navigation";
@@ -209,5 +210,3 @@ export async function deleteOrder(order_id, current){
   await sql`DELETE FROM Orders WHERE id = ${order_id};`;
   revalidatePath(`/dashboard/${current}`);
 }
-
-

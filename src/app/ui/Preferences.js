@@ -1,8 +1,6 @@
 export default function Preferences({dispatch, warnings, existingInfo}){
-  console.log(existingInfo.trust, existingInfo)
 
   function next(formData){
-    console.log('form submit', formData.get('preferences'))
     const preferences = formData.get('preferences')
     dispatch({type: 'next', payload: { preferences }})
   }

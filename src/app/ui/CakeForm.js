@@ -9,7 +9,6 @@ import Flavors from "./Flavors";
 import ReferencePhoto from "./ReferencePhoto";
 import Policies from "./Policies";
 import ThankYou from "./ThankYou";
-import { submit } from "@/lib/actions";
 
 export default function CakeForm({cakeDays, unavailable}){
 
@@ -71,6 +70,7 @@ export default function CakeForm({cakeDays, unavailable}){
     }
   ]
 
+
   function reducer(state, action){
     switch(action.type){
       case 'warn':
@@ -94,8 +94,7 @@ export default function CakeForm({cakeDays, unavailable}){
         return {...state, currentStep: state.currentStep - 1}
       case 'submit':
         state.steps[state.currentStep].state = 'valid';
-        submit(state.formData);
-        return {...state, currentStep: state.currentStep +1}
+        return {...state, currentStep: state.currentStep +1}        
       case 'extra': {
         state.formData.cakeDetails.extras[action.payload.name] = action.payload.checkedState;
         state.formData.total = action.payload.total;
