@@ -6,7 +6,6 @@ import { sql } from '@vercel/postgres';
 import OrderReceivedNotice from "@/emails/OrderReceivedNotice";
 import OrderDetails from "@/emails/OrderDetail";
 import OrderConfirmation from "@/emails/OrderConfirmation";
-import KoalaWelcomeEmail from "@/emails/WelcomeTest";
 import { addCake, addCustomer, addOrder, addCakeDay } from "./queries";
 import { cookies } from 'next/headers';
 import { redirect } from "next/navigation";
@@ -109,11 +108,11 @@ export async function submit(formData){
 
 }
 
-export async function confirmOrder (formData) {
+export async function confirmOrder(formData) {
   unstable_noStore();
   const resend = new Resend(process.env.RESEND_API_KEY);
   const emailBody = formData.get("emailBody");
-  const customerEmail = formData.get("customerEmail")
+  const customerEmail = formData.get("customerEmail");
   const update = await sql`UPDATE Orders SET status = 'confirmed' where Orders.id = ${formData.get('orderId')};`;
   
   try{
@@ -159,6 +158,7 @@ export async function login(formData){
   }
 }
 
+/* TODO what is going on here? find out if any references and if not, delete */
 export async function isAuthenticated(){
   const token = cookies().get("hfa");
   if(!token?.value){
@@ -199,10 +199,6 @@ export async function getOrderInfo(order_id){
 export async function logout(){
   cookies().delete("hfa");
   redirect('/');
-}
-
-export async function redirectToJotForm(){
-  redirect("https://form.jotform.com/233177226048052");
 }
 
 export async function deleteOrder(order_id, current){
