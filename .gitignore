@@ -50,3 +50,6 @@ todo.md
 
 # videos
 *.mp4
+
+#dummy
+/src/app/dummyApi

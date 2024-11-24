@@ -2,17 +2,20 @@
 
 import Image from "next/image"
 import { useState } from "react";
+import { useFormStatus } from "react-dom";
+import { submit } from "@/lib/actions";
 
-export default function Policies({dispatch, warnings}){
+export default function Policies( { dispatch, warnings, existingInfo } ){
 
   const [viewWidth, setViewWidth] = useState(visualViewport.width);
 
-  function submit(formData){
+  async function submitForm(formData){
     const agree = formData.get('agree');
     if(agree !== 'yes'){
       dispatch({type: 'warn', payload:{agree: 'You have to agree.'}})
     } else {
-      dispatch({type: 'submit', payload:{agree}})
+      await submit(existingInfo);
+      dispatch({type: 'submit', payload:{agree}});
     }
   }
 
@@ -26,8 +29,13 @@ export default function Policies({dispatch, warnings}){
 
   const center = Math.floor(viewWidth/3);
 
+  function SubmitBtn(){
+    const { pending } = useFormStatus();
+    return <button type="submit" className="formBtn btn-primary mr-[16px] z-0" disabled={pending}>{pending? <span className="loading loading-spinner text-primary"></span> : "Submit"}</button>
+  }
+
   return (
-    <form className="overflow-auto overscroll-contain flex flex-col pb-6" action={submit}>
+    <form className="overflow-auto overscroll-contain flex flex-col pb-6" action={submitForm}>
       {viewWidth > 500 ? <Image src={"/hf2.png"} height={800} width={600} alt="fly guy" className={`z-8 absolute p-0 m-0 opacity-15`} style={{left: viewWidth > 1500 ? center : center-100}}/> :
       <Image src={'/policyCake.jpeg'} height={800} width={800} alt="policy cake" className="w-full self-center mb-6 rounded md:h-[440px] md:w-[440px]"/>}
       <div className="bg-pink-200 m-[8px] display flex flex-col p-4 rounded">
@@ -50,7 +58,7 @@ export default function Policies({dispatch, warnings}){
       </div>
       <div className="flex justify-between">
         <button type="button" className="formBtn btn-warn z-0" onClick={prev}>Previous</button>
-        <button type="submit" className="formBtn btn-primary mr-[16px] z-0">Submit</button>
+        <SubmitBtn />
       </div>
     </form>
   )
