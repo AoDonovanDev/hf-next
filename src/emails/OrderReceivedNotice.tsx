@@ -18,12 +18,14 @@ interface OrderReceivedNotice {
   firstName?: string;
   hfEmail?: string;
   estimatedTotal?: string
+  cakeSize? : string
 }
 
 export const OrderReceivedNotice = ({
   firstName,
   hfEmail,
-  estimatedTotal
+  estimatedTotal,
+  cakeSize
 }: OrderReceivedNotice) => {
 
   const previewText = `Howdy from Housefly...`;
@@ -51,7 +53,7 @@ export const OrderReceivedNotice = ({
               Hello {firstName},
             </Text>
             <Text className="text-black text-[14px] leading-[24px]">
-              Your order has been received! Your estimated total is {estimatedTotal}. You will receive a confirmation email and invoice in 2-3 business days. I look forward to making this cake for you!
+              Your order has been received! Your estimated total for your {`${cakeSize} inch`} cake is {estimatedTotal}. You will receive a confirmation email and invoice in 2-3 business days. I look forward to making this cake for you!
             </Text>
             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
             <Text className="text-[#666666] text-[12px] leading-[24px]">

@@ -1,5 +1,7 @@
 export default function Preferences({dispatch, warnings, existingInfo}){
 
+  console.log(existingInfo)
+
   function next(formData){
     const preferences = formData.get('preferences')
     dispatch({type: 'next', payload: { preferences }})

@@ -49,7 +49,7 @@ export async function submit(formData){
       to: [formData.contactInfo.email],
       reply_to: [process.env.ADMIN_EMAIL],
       subject: 'Order Received',
-      react: <OrderReceivedNotice firstName={formData.contactInfo.firstName} hfEmail={"houseflyvictuals@gmail.com"} estimatedTotal={`$${formData.total}.00`} />
+      react: <OrderReceivedNotice firstName={formData.contactInfo.firstName} hfEmail={"houseflyvictuals@gmail.com"} estimatedTotal={`$${formData.total}.00`} cakeSize={formData.cakeSize} />
     })
   } catch(err) {
     console.log("***Failed to send Order Received email", err);
