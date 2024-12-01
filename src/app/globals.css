@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Ingrid+Darling&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,4 +22,11 @@ body{
 
 .myInput {
     font-size: 16px;
+}
+
+.cursiveHeader {
+  font-family: "Ingrid Darling", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 60px;
 }

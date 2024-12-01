@@ -42,7 +42,7 @@ export default function ReferencePhoto({dispatch, warnings, existingInfo}){
       <div className="flex flex-col">
         <Image src="/croppedPhotoPickerCake.jpg" alt="cake reference photo" height={800} width={800} className="w-full self-center rounded md:h-[440px] md:w-[440px]"/>
         <div className="flex flex-col gap-[12px] pt-6">
-          <h2 className="card-title">Add a reference photo</h2>
+          <h2 className="card-title cursiveHeader mb-[8px]">Add a reference photo</h2>
           <p >Add a photo of a Housefly cake that you&apos;ve liked or other photo for color reference. No cake will be perfectly replicated. Cakes by other local bakers are not allowed as reference. If you like their work, you should support and order from them!</p>
         </div>
       </div>

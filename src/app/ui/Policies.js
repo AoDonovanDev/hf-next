@@ -39,7 +39,7 @@ export default function Policies( { dispatch, warnings, existingInfo } ){
       {viewWidth > 500 ? <Image src={"/hf2.png"} height={800} width={600} alt="fly guy" className={`z-8 absolute p-0 m-0 opacity-15`} style={{left: viewWidth > 1500 ? center : center-100}}/> :
       <Image src={'/policyCake.jpeg'} height={800} width={800} alt="policy cake" className="w-full self-center mb-6 rounded md:h-[440px] md:w-[440px]"/>}
       <div className="bg-pink-200 m-[8px] display flex flex-col p-4 rounded">
-        <h1 className="text-xl font-medium self-center">Policies</h1>
+        <h1 className="text-xl font-medium self-center cursiveHeader mb-[12px]">Policies</h1>
         <p>2 weeks notice required for all cakes. Any order placed with shorter notice may be subject to a rush fee.<br/><br/>
           All prices listed are the base price for your chosen size. A quote will be sent to you within 7 days of submitting the order request.<br/><br/>
           A 50% deposit is required within 7 days of order confirmation. Spots are very limited. If the deposit is not received within this time period, your order is subject to

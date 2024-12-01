@@ -43,7 +43,7 @@ export default function ContactInfo({dispatch, warnings, existingInfo}){
   return (
     <form action={next} className="flex flex-col h-full justify-between py-6">
       <div className="join join-vertical p-[60px]">
-        <h1 className="text-xl font-bold mb-[24px]">Contact Info</h1>
+        <h1 className="text-xl font-bold mb-[24px] cursiveHeader">Contact Info</h1>
         <label htmlFor="firstName" className={warnings.firstName ? "text-red-400" : "text-black"}>{warnings.firstName ? warnings.firstName : "First Name"}</label>
         <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" name="firstName" defaultValue={existingInfo.contactInfo?.firstName ?? ''}/>
         <label htmlFor="lastName" className={warnings.lastName ? "text-red-400" : "text-black"}>{warnings.lastName ? warnings.lastName : "Last Name"}</label>

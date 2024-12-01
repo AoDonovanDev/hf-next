@@ -72,7 +72,7 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
 
   return (
     <div className="Pickup h-full flex flex-col py-6">
-      <h1 className="text-xl font-bold self-center">Pickup Info</h1>
+      <h1 className="text-xl font-bold self-center cursiveHeader">Pickup Info</h1>
       <div className="flex justify-center my-6">
         <p className="text-red-400">{warnings.pickupDate}</p>
         <p className="text-red-400">{warnings.pickupTime}</p>

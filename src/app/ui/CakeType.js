@@ -28,7 +28,7 @@ export default function CakeType({dispatch, warnings, existingInfo}){
 
   return (
     <div className="form-control flex w-full h-full overflow-auto overscroll-contain py-6">
-      <h1 className="text-xl font-bold self-center">Choose Trust or Custom</h1>
+      <h1 className="text-xl font-bold self-center cursiveHeader">Trust or Custom</h1>
       <label className="cursor-pointer label flex justify-center">
         <div className="flex flex-col">
           <label className="swap swap-flip text-2xl">
