@@ -24,7 +24,7 @@ export default function ReferencePhoto({dispatch, warnings, existingInfo}){
         });
     };
     const base64 = await convertBase64(fileInfo);
-    const imgUrl = await upload(base64)
+    const imgUrl = await upload(base64);
     dispatch({type: 'next', payload:{imgUrl}});
   }
 
