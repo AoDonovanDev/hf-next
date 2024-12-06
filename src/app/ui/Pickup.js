@@ -64,15 +64,16 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
     if(isUnavilable(btnTime)){
       return "formBtn btn-disabled line-through cursor-not-allowed";
     } else if(time === btnTime){
-      return "formBtn btn-success";
+      return "formBtn btn-success btn-disabled";
     } else {
-      return "formBtn";
+      return "formBtn btn-disabled";
     }
   }
 
   return (
     <div className="Pickup h-full flex flex-col py-6">
       <h1 className="text-xl font-bold self-center cursiveHeader">Pickup Info</h1>
+      <p className="mt-[24px] font-bold">All booked up for the year! Check back soon or check my instagram for more info!</p>
       <div className="flex justify-center my-6">
         <p className="text-red-400">{warnings.pickupDate}</p>
         <p className="text-red-400">{warnings.pickupTime}</p>
@@ -92,7 +93,7 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
               days: 5
             })},
           ]}
-          minDate={new Date()}
+          minDate={new Date(2024, 11, 31)}
           maxDate={new Date(2024, 11, 31)}
           placeholderText="Select a day for pickup"
           form="external-form"
@@ -119,7 +120,7 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
           <input type="radio" name="pickupTime" id="2pm" value={'2:00'} onChange={timeClick} checked={time==='2:00'} hidden={true}/>
           <input type="radio" name="pickupTime" id="230pm" value={'2:30'} onChange={timeClick} checked={time==='2:30'} hidden={true}/>
           <input hidden={true} defaultValue={startDate} name="date"/>
-          <button className="formBtn btn-primary justify-self-end w-[90px]">Next</button>
+          <button className="formBtn btn-primary justify-self-end w-[90px] btn-disabled">Next</button>
         </form>
       </div>
     </div>
