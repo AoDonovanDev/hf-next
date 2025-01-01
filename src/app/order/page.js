@@ -6,12 +6,9 @@ export default async function Page(){
   const { cakeDays } = await getCakeDays();
   const booked = cakeDays.rows.filter(r => !r.available).map(r => new Date(r.date));
   const holidays = [
-    new Date(2024, 10, 20),
-    new Date(2024, 10 ,21),
-    new Date(2024, 10, 22),
-    new Date(2024, 11, 24),
-    new Date(2024, 11, 25),
-    new Date(2024, 11, 26)
+    new Date(2025, 1, 13),
+    new Date(2025, 1, 14),
+    new Date(2025, 1, 27)
     ]
   for(let date of holidays){
       booked.push(date);

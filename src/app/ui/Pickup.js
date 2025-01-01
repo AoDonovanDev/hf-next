@@ -62,18 +62,20 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
 
   function buttonClasses(btnTime){
     if(isUnavilable(btnTime)){
-      return "formBtn btn-disabled line-through cursor-not-allowed";
+      return "formBtn line-through cursor-not-allowed disabled";
     } else if(time === btnTime){
-      return "formBtn btn-success btn-disabled";
+      return "formBtn btn-success";
     } else {
-      return "formBtn btn-disabled";
+      return "formBtn";
     }
   }
 
   return (
-    <div className="Pickup h-full flex flex-col py-6">
+    <div className="Pickup h-full flex flex-col py-6 items-center">
       <h1 className="text-xl font-bold self-center cursiveHeader">Pickup Info</h1>
-      <p className="mt-[24px] font-bold">All booked up for the year! Check back soon or check my instagram for more info!</p>
+      <p className="mt-[24px] text-sm mx-[8px]">If the date you'd like is not available on the calendar, there are no pick ups left for that day. 
+        Consider picking a day close to what you'd like - cakes can last up to 4 days if kept refrigerated in their original box.
+      </p>
       <div className="flex justify-center my-6">
         <p className="text-red-400">{warnings.pickupDate}</p>
         <p className="text-red-400">{warnings.pickupTime}</p>
@@ -93,8 +95,8 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
               days: 5
             })},
           ]}
-          minDate={new Date(2024, 11, 31)}
-          maxDate={new Date(2024, 11, 31)}
+          minDate={new Date(2025, 0, 30)}
+          maxDate={new Date(2025, 1, 28)}
           placeholderText="Select a day for pickup"
           form="external-form"
           inline
@@ -108,7 +110,7 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
           <label htmlFor="230pm" className={buttonClasses('2:30')}>2:30pm</label>
         </div>
       </div>
-      <div className="flex justify-between justify-self-end items-end mt-8 h-full">
+      <div className="flex justify-between items-end mt-8 h-full w-full">
         <form action={prev}>
           <button className="formBtn btn-warn w-[90px]">Previous</button>
         </form>
@@ -120,7 +122,7 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
           <input type="radio" name="pickupTime" id="2pm" value={'2:00'} onChange={timeClick} checked={time==='2:00'} hidden={true}/>
           <input type="radio" name="pickupTime" id="230pm" value={'2:30'} onChange={timeClick} checked={time==='2:30'} hidden={true}/>
           <input hidden={true} defaultValue={startDate} name="date"/>
-          <button className="formBtn btn-primary justify-self-end w-[90px] btn-disabled">Next</button>
+          <button className="formBtn btn-primary justify-self-end w-[90px]">Next</button>
         </form>
       </div>
     </div>
