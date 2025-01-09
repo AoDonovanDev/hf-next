@@ -8,6 +8,7 @@ export default async function Page(){
   const holidays = [
     new Date(2025, 1, 13),
     new Date(2025, 1, 14),
+    new Date(2025, 2, 14),
     new Date(2025, 1, 27)
     ]
   for(let date of holidays){
