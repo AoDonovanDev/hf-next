@@ -10,7 +10,6 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
   const [time, setTime] = useState(existingInfo.pickupDetails?.pickupTime ? existingInfo.pickupDetails.pickupTime : null);
   console.log("*************************unavailable dates in pickup comnponent: ", unavailable)
   const isAvailable = (date) => {
-    if(unavailable.includes(date)) return false;
     const day = getDay(date);
     return day === 3 || day === 4 || day === 5 || day === 6;
   };
@@ -90,7 +89,10 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
             }
           }
           filterDate={isAvailable}
-          excludeDates={unavailable}
+          excludeDates={[...unavailable,  new Date(2025, 1, 13),
+            new Date(2025, 1, 14),
+            new Date(2025, 2, 14),
+            new Date(2025, 1, 27)]}
           excludeDateIntervals={[
             { start: new Date(), end: add(new Date(), {
               days: 5
