@@ -24,7 +24,6 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     setOther(()=>{
       return e.target.value === 'other' ? true : false;
     })
-    console.log(other)
   }
 
   function extraHandler(e){
@@ -86,7 +85,6 @@ export default function Flavors({dispatch, warnings, existingInfo}){
   }
 
   function next(formData){
-    console.log(formData)
     const cakeFlavor = formData.get('cakeFlavor');
     const frostingType = formData.get('frostingType');
     const frostingFlavor = formData.get('frostingFlavor');
@@ -122,7 +120,6 @@ export default function Flavors({dispatch, warnings, existingInfo}){
     else if(!frostingFlavor){
       dispatch({type: 'warn', payload:{frostingFlavor: "Please pick a frosting flavor"}});
     } else {
-      console.log(cakeDetails);
       dispatch({type: 'next', payload: { cakeDetails }})
     }
   }

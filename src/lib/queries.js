@@ -97,6 +97,6 @@ export async function getConfirmedOrdersWithCustomerInfo() {
     `
     return confirmedOrdersWithCustomerInfo.rows;
   } catch(err) {
-    console.log('Something went wrong when fetching confirmed orders:', err);
+    console.log("***Something went wrong when fetching confirmed orders:", err);
   }
 }

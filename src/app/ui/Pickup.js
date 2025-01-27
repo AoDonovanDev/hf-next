@@ -8,7 +8,6 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
 
   const [startDate, setStartDate] = useState(existingInfo.pickupDetails?.date ? new Date(existingInfo.pickupDetails.date) : '');
   const [time, setTime] = useState(existingInfo.pickupDetails?.pickupTime ? existingInfo.pickupDetails.pickupTime : null);
-  console.log("*************************unavailable dates in pickup comnponent: ", unavailable)
   const isAvailable = (date) => {
     const day = getDay(date);
     return day === 3 || day === 4 || day === 5 || day === 6;

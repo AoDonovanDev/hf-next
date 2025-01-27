@@ -5,8 +5,6 @@ import { confirmOrder } from "@/lib/actions";
 import { useFormState } from 'react-dom';
 
 export default function Confirmation ( { order } ) {
-
-  console.log(order);
   const { replace } = useRouter();
   function cancel(){
     replace('/dashboard/new')

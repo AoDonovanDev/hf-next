@@ -35,7 +35,7 @@ export async function upload(b64Img){
     const { display_url } = data;
     return display_url;
   } catch(err) {
-    console.log(err);
+    console.log("***Could not upload image", err);
     return("could not upload image");
   }
 }
@@ -137,8 +137,8 @@ export async function getCakeDays(){
   try {
     const cakeDays = await sql`SELECT * FROM Cake_Days`;
     return {cakeDays};
-  } catch {
-    console.log(error);
+  } catch(err) {
+    console.log("***Could not select cake_days", err);
   }
 }
 

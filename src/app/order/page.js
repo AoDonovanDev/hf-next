@@ -14,7 +14,6 @@ export default async function Page(){
   for(let date of holidays){
       booked.push(date);
       }
-  console.log("***************************log for dates:", holidays, booked)
   return (
     <CakeForm cakeDays={cakeDays.rows} unavailable={booked}/>
   )
