@@ -150,7 +150,8 @@ export default function Flavors({dispatch, warnings, existingInfo}){
       </div>
       <div className="flex flex-col">
         <p className="text-red-400">{warnings.frostingType}</p>
-        <label className="mb-2 font-semibold">Frosting type:</label>
+        <label className="font-semibold">Frosting type:</label>
+        <p className="text-xs mb-[6px] p-[0px]">currently I am only making 1 type of frosting</p>
         <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="frostingType" 
@@ -160,13 +161,14 @@ export default function Flavors({dispatch, warnings, existingInfo}){
                  defaultChecked={existingInfo.cakeDetails?.frostingType === 'Swiss Meringue Buttercream'}/>
           <label htmlFor="smb" className="ml-6">Swiss Meringue Buttercream</label>
         </div>
-        <div className="mb-2 flex items-center">
+        {/* <div className="mb-2 flex items-center">
           <input type="radio" 
                  name="frostingType" 
                  className="radio radio-secondary myInput" 
                  id={"ab"} 
                  value={"American Buttercream"}
-                 defaultChecked={existingInfo.cakeDetails?.frostingType === 'American Buttercream'}/>
+                 defaultChecked={existingInfo.cakeDetails?.frostingType === 'American Buttercream'}
+                 disabled/>
           <label htmlFor="ab" className="ml-6">American Buttercream</label>
         </div>
         <div className="mb-2 flex items-center">
@@ -175,9 +177,10 @@ export default function Flavors({dispatch, warnings, existingInfo}){
                  className="radio radio-secondary myInput" 
                  id={"cc"}
                  value={"Cream Cheese"}
-                 defaultChecked={existingInfo.cakeDetails?.frostingType === 'Cream Cheese'}/>
+                 defaultChecked={existingInfo.cakeDetails?.frostingType === 'Cream Cheese'}
+                 disabled/>
           <label htmlFor="cc" className="ml-6">Cream Cheese (not available for heavily piped cakes)</label>
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-col">
         <p className="text-red-400">{warnings.frostingFlavor}</p>

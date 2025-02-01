@@ -48,7 +48,7 @@ export default function Policies( { dispatch, warnings, existingInfo } ){
           this Housefly Victuals will not be held liable for any allergic reaction resulting from consumption of the cake.<br/><br/>
           Final payment is available in exact change on pick up or Venmo. Payment must be made before the cake leaves the premises.<br/><br/>
           If the booking is cancelled due to illness or any other unforeseen circumstance that affects the ability to complete the order, the deposit will be refunded within 7 days after notification of cancellation.
-          Pick up only. Delivery unavailable at this time.  <br/><br/>
+          Pick up only. Delivery unavailable at this time.  <br/> <br/> This product was produced at a private residence that is exempt from state licensing and inspection. This product may contain allergens.<br/><br/>
           </p>
           <div className="flex">
           {warnings && <h1 className="text-red-400">{warnings.agree}</h1>}
