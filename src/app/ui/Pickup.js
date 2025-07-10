@@ -72,8 +72,10 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
   return (
     <div className="Pickup h-full flex flex-col py-6 items-center">
       <h1 className="text-xl font-bold self-center cursiveHeader">Pickup Info</h1>
-      <p className="mt-[24px] text-sm mx-[8px]">If the date you&apos;d like is not available on the calendar, there are no pick ups left for that day. 
+      {/* <p className="mt-[24px] text-sm mx-[8px]">If the date you&apos;d like is not available on the calendar, there are no pick ups left for that day. 
         Consider picking a day close to what you&apos;d like - cakes can last up to 4 days if kept refrigerated in their original box.
+      </p> */}
+      <p className="mt-[24px] text-sm mx-[8px]">Closed for now! Follow me on instagram for updates!
       </p>
       <div className="flex justify-center my-6">
         <p className="text-red-400">{warnings.pickupDate}</p>
@@ -98,7 +100,7 @@ export default function Pickup({dispatch, existingInfo, warnings, cakeDays, unav
             })},
           ]}
           minDate={new Date(2025, 0, 30)}
-          maxDate={new Date(2025, 1, 28)}
+          maxDate={new Date(2025, 0, 29)}
           placeholderText="Select a day for pickup"
           form="external-form"
           inline
